@@ -14,20 +14,27 @@
             <img class="img" :src='img' :alt="post.title">
           </template>
         </template>
-        <main-button class="post__more_img" @click="showAllListImg(post.id)">{{
-            post.isShowAllImg ? '<<' : '>>'
-          }}
+        <main-button
+            class="post__more_img"
+            @click="showAllListImg(post.id)"
+            v-if="post.imgList.length > maxShowImgInPost"
+        >{{ post.isShowAllImg ? '<<' : '>>' }}
         </main-button>
       </div>
       <p class="post__body">{{ post.body }}</p>
-      <main-button class="post__delete" @click="deletePost(post.id)">Удалить</main-button>
+      <main-button
+          class="post__delete"
+          @click="deletePost(post.id)"
+      >
+        Удалить
+      </main-button>
     </div>
   </transition-group>
 </template>
 
 <script>
 import CreatePost from "@/components/CreatePost.vue";
-import {TEXT_1} from "@/components/const";
+import {MAX_SHOW_IMG_IN_POST, TEXT_1} from "@/components/const";
 
 export default {
   components: {
@@ -45,6 +52,7 @@ export default {
         }
       ],
       isOpenImg: false,
+      maxShowImgInPost: MAX_SHOW_IMG_IN_POST,
     }
   },
   methods: {
