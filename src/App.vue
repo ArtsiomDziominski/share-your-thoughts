@@ -14,13 +14,20 @@
             <img class="img" :src='img' :alt="post.title">
           </template>
         </template>
-        <main-button class="post__more_img" @click="showAllListImg(post.id)">{{
-            post.isShowAllImg ? '<<' : '>>'
-          }}
+        <main-button
+            class="post__more_img"
+            v-if="post.imgList.length > 3"
+            @click="showAllListImg(post.id)"
+        >{{ post.isShowAllImg ? '<<' : '>>' }}
         </main-button>
       </div>
       <p class="post__body">{{ post.body }}</p>
-      <main-button class="post__delete" @click="deletePost(post.id)">Удалить</main-button>
+      <main-button
+          class="post__delete"
+          @click="deletePost(post.id)"
+      >
+        Удалить
+      </main-button>
     </div>
   </transition-group>
 </template>
@@ -50,7 +57,6 @@ export default {
   methods: {
     addPost(post) {
       this.posts.push(post)
-      console.log(this.posts)
     },
     showAllListImg(id) {
       this.posts.forEach(post => {

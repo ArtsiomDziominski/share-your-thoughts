@@ -33,7 +33,6 @@ export default {
             this.imgList.push(ev.target.result);
           }
         }
-        console.log(this.imgList)
         this.$emit('create', this.imgList);
       }
     }
