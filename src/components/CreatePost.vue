@@ -50,7 +50,6 @@ export default {
     },
     transferIngList(img) {
       this.post.imgList = img
-      console.log(img)
     }
   }
 }
