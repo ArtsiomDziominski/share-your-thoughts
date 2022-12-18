@@ -3,9 +3,20 @@
     <input type="file" class="select__file" @change="selectFile($event)" multiple accept="image/*">
     <p class="max_length_img" v-if="maxLengthImg">Максимально можно добавить 8 картинок</p>
     <div class="select__img" id="img" v-for="img in imgList">
-      <img class="img" :src='img' alt="select file">
+      <img
+          class="img"
+          :src='img'
+          alt="select file"
+      >
+      <img
+          class="select__img_close"
+          src="src/assets/close.svg"
+          @click="deleteImg(img)"
+          alt="close image"
+      >
     </div>
   </div>
+
 </template>
 
 <script>
@@ -33,9 +44,12 @@ export default {
             this.imgList.push(ev.target.result);
           }
         }
-        console.log(this.imgList)
         this.$emit('create', this.imgList);
       }
+    },
+    deleteImg(selectImg) {
+      this.imgList = this.imgList.filter(img => img !== selectImg);
+      this.$emit('create', this.imgList);
     }
   }
 }
@@ -48,18 +62,34 @@ export default {
 }
 
 .select__img {
+  position: relative;
   display: inline-block;
   margin: 0 5px 10px 0;
-  border: 1px solid rgba(0, 0, 0, 0.29);
+  border: 1px solid var(--color-border-img);
 }
 
 .max_length_img {
-  color: red;
+  color: var(--color-attention);
   font-size: 12px;
 }
 
 .img {
   width: 50px;
   height: 50px;
+}
+
+.select__img_close {
+  width: 12px;
+  height: 12px;
+  background-color: var(--color-background-close-img);
+  border-radius: 3px;
+  cursor: pointer;
+  position: absolute;
+  right: 3px;
+  top: 3px;
+}
+
+.select__img_close:hover {
+  background-color: var(--color-background-close-img-hover);
 }
 </style>

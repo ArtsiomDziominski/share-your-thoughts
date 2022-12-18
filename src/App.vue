@@ -58,7 +58,6 @@ export default {
   methods: {
     addPost(post) {
       this.posts.push(post)
-      console.log(this.posts)
     },
     showAllListImg(id) {
       this.posts.forEach(post => {
@@ -77,17 +76,17 @@ export default {
 
 </script>
 
-<style>
+<style scoped>
 input {
   outline: none;
 }
 
 .post {
-  width: 100%;
   padding: 30px;
   margin: 20px 0;
   border-radius: 20px;
   box-shadow: 2px 2px 10px #181818;
+  position: relative;
 }
 
 .img {
