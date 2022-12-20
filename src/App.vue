@@ -1,17 +1,22 @@
 <template>
   <create-post @create="addPost"></create-post>
+  <show-image
+      v-model:image-full-screen="imageFullScreen"
+      :image-list="imageListFullScreen"
+  >
+  </show-image>
   <transition-group name="post-list">
     <div class="post" v-for="post in posts" :post="post" :key="post.id">
       <h2 class="post__title">{{ post.title }}</h2>
       <div class="post__img">
         <template v-if="post.isShowAllImg" :key="post.id">
           <template v-for="img in post.imgList">
-            <img class="img" :src="img" :alt="post.title">
+            <img class="img" :src="img" alt="image post" @click="displayImageFullScreen(img, post.imgList)">
           </template>
         </template>
         <template v-else>
           <template v-for="img in post.imgList.slice(0,3)" :key="post.id">
-            <img class="img" :src='img' :alt="post.title">
+            <img class="img" :src='img' alt="image post" @click="displayImageFullScreen(img, post.imgList)">
           </template>
         </template>
         <main-button
@@ -35,9 +40,11 @@
 <script>
 import CreatePost from "@/components/CreatePost.vue";
 import {MAX_SHOW_IMG_IN_POST, TEXT_1} from "@/components/const";
+import ShowImage from "@/components/ShowImageFullScreen.vue";
 
 export default {
   components: {
+    ShowImage,
     CreatePost,
   },
   data() {
@@ -53,6 +60,8 @@ export default {
       ],
       isOpenImg: false,
       maxShowImgInPost: MAX_SHOW_IMG_IN_POST,
+      imageFullScreen: '',
+      imageListFullScreen: [],
     }
   },
   methods: {
@@ -70,6 +79,10 @@ export default {
     },
     deletePost(id) {
       this.posts = this.posts.filter((post) => post.id !== id);
+    },
+    displayImageFullScreen(image, imageList) {
+      this.imageFullScreen = image;
+      this.imageListFullScreen = imageList;
     }
   },
 }

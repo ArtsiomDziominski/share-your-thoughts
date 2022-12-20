@@ -5,6 +5,11 @@
   --color-background-close-img-hover: rgb(24, 24, 24);
   --color-border-img: rgba(0, 0, 0, 0.29);
 
+  --color-background-full-screen-image: rgba(0, 0, 0, 0.9);
+
+  --color-background-left-arrow-image: rgba(24, 24, 24, 0.5);
+  --color-background-left-arrow-image-hover: rgb(24, 24, 24);
+
   --color-attention: red;
   --color-text: black;
 }
