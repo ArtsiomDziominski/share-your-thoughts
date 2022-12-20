@@ -7,7 +7,7 @@
         maxlength="40"
         v-model="post.title"
     >
-    <select-file @create="transferIngList"></select-file>
+    <select-file @create="transferImgList"></select-file>
     <p>Комментарий</p>
     <textarea
         name="comment"
@@ -48,7 +48,7 @@ export default {
       }
       this.dialogVisible=false;
     },
-    transferIngList(img) {
+    transferImgList(img) {
       this.post.imgList = img
     }
   }
