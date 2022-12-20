@@ -1,7 +1,7 @@
 <template>
   <create-post @create="addPost"></create-post>
   <show-image
-      v-bind:image-full-screen="imageFullScreen"
+      v-model:image-full-screen="imageFullScreen"
       :image-list="imageListFullScreen"
   >
   </show-image>

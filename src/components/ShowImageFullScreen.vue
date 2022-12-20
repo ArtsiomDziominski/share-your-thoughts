@@ -32,17 +32,18 @@ export default {
   },
   watch: {
     imageFullScreen(){
-      this.currentImage = this.imageFullScreen
+      this.currentImage = this.imageFullScreen;
     }
   },
   methods: {
     closeImageFullScreen() {
       this.currentImage = '';
+      this.$emit('update:imageFullScreen', this.currentImage)
     },
     leftImage() {
       for (let i = 0; i < this.imageList.length; i++) {
         if (this.currentImage === this.imageList[i]) {
-          this.currentImage = this.imageList[i - 1]
+          this.currentImage = this.imageList[i - 1];
           break
         }
       }
@@ -50,7 +51,7 @@ export default {
     rightImage() {
       for (let i = 0; i < this.imageList.length; i++) {
         if (this.currentImage === this.imageList[i]) {
-          this.currentImage = this.imageList[i + 1]
+          this.currentImage = this.imageList[i + 1];
           break
         }
       }
