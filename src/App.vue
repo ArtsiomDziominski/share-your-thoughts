@@ -1,50 +1,24 @@
 <template>
   <create-post @create="addPost"></create-post>
-  <show-image
-      v-model:image-full-screen="imageFullScreen"
-      :image-list="imageListFullScreen"
-  >
-  </show-image>
   <transition-group name="post-list">
     <div class="post" v-for="post in posts" :post="post" :key="post.id">
-      <h2 class="post__title">{{ post.title }}</h2>
-      <div class="post__img">
-        <template v-if="post.isShowAllImg" :key="post.id">
-          <template v-for="img in post.imgList">
-            <img class="img" :src="img" alt="image post" @click="displayImageFullScreen(img, post.imgList)">
-          </template>
-        </template>
-        <template v-else>
-          <template v-for="img in post.imgList.slice(0,3)" :key="post.id">
-            <img class="img" :src='img' alt="image post" @click="displayImageFullScreen(img, post.imgList)">
-          </template>
-        </template>
-        <main-button
-            class="post__more_img"
-            @click="showAllListImg(post.id)"
-            v-if="post.imgList.length > maxShowImgInPost"
-        >{{ post.isShowAllImg ? '<<' : '>>' }}
-        </main-button>
-      </div>
-      <p class="post__body">{{ post.body }}</p>
-      <main-button
-          class="post__delete"
-          @click="deletePost(post.id)"
+      <post
+          :post="post"
+          @create="deletePost"
       >
-        Удалить
-      </main-button>
+      </post>
     </div>
   </transition-group>
 </template>
 
 <script>
 import CreatePost from "@/components/CreatePost.vue";
-import {MAX_SHOW_IMG_IN_POST, TEXT_1} from "@/components/const";
-import ShowImage from "@/components/ShowImageFullScreen.vue";
+import {TEXT_1} from "@/components/const";
+import Post from "@/components/Post.vue";
 
 export default {
   components: {
-    ShowImage,
+    Post,
     CreatePost,
   },
   data() {
@@ -54,74 +28,30 @@ export default {
           id: 1,
           title: 'Hello World',
           body: TEXT_1,
-          imgList: ['src/assets/logo.svg', 'src/assets/img1.png', 'src/assets/img2.png', 'src/assets/img3.png', 'src/assets/img4.png'],
-          isShowAllImg: false,
+          imageList: ['src/assets/logo.svg', 'src/assets/img1.png', 'src/assets/img2.png', 'src/assets/img3.png', 'src/assets/img4.png'],
         }
       ],
-      isOpenImg: false,
-      maxShowImgInPost: MAX_SHOW_IMG_IN_POST,
-      imageFullScreen: '',
-      imageListFullScreen: [],
     }
   },
   methods: {
     addPost(post) {
       this.posts.push(post)
     },
-    showAllListImg(id) {
-      this.posts.forEach(post => {
-        if (post.id === id && post.isShowAllImg) {
-          post.isShowAllImg = false;
-        } else if (post.id === id) {
-          post.isShowAllImg = true;
-        }
-      })
-    },
     deletePost(id) {
       this.posts = this.posts.filter((post) => post.id !== id);
     },
-    displayImageFullScreen(image, imageList) {
-      this.imageFullScreen = image;
-      this.imageListFullScreen = imageList;
-    }
   },
 }
 
 </script>
 
 <style scoped>
-input {
-  outline: none;
-}
-
 .post {
   padding: 30px;
   margin: 20px 0;
   border-radius: 20px;
   box-shadow: 2px 2px 10px #181818;
   position: relative;
-}
-
-.img {
-  width: 100px;
-  height: 100px;
-  margin: 5px;
-  cursor: pointer;
-}
-
-.post__img {
-  display: flex;
-  align-items: center;
-}
-
-.post__more_img {
-  height: 60px;
-}
-
-.post__delete {
-  position: absolute;
-  top: 15px;
-  right: 15px;
 }
 
 .post-list {
