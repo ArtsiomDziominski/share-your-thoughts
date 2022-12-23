@@ -2,11 +2,11 @@
   <main-button class="create_post" @click="dialogVisible = true">Создать пост</main-button>
   <modal-dialog v-model:show-dialog="dialogVisible">
     <p class="dialog__title">Заголовок</p>
-    <input
+    <main-input
         class="dialog__title_input"
         maxlength="40"
         v-model="post.title"
-    >
+    ></main-input>
     <select-file @create="transferImgList"></select-file>
     <p>Комментарий</p>
     <textarea
@@ -33,7 +33,7 @@ export default {
         id: '',
         title: '',
         body: '',
-        imgList: []
+        imageList: []
       },
     }
   },
@@ -49,7 +49,7 @@ export default {
       this.dialogVisible=false;
     },
     transferImgList(img) {
-      this.post.imgList = img
+      this.post.imageList = img
     }
   }
 }
@@ -69,9 +69,6 @@ export default {
 
 .dialog__title_input {
   width: 300px;
-  border-top: 0;
-  border-left: 0;
-  border-right: 0;
 }
 
 textarea {

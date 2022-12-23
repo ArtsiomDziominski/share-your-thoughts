@@ -63,7 +63,7 @@ export default {
 <style scoped>
 .wrapper {
   background-color: var(--color-background-full-screen-image);
-  position: absolute;
+  position: fixed;
   top: 0;
   right: 0;
   bottom: 0;

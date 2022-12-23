@@ -12,6 +12,8 @@
 
   --color-attention: red;
   --color-text: black;
+
+  --input-border-bottom-color: black;
 }
 
 body {
