@@ -6,19 +6,19 @@
   </show-image>
   <h2 class="post__title">{{ post.title }}</h2>
   <div class="post__img">
-    <template v-for="img in isShowAllImages ? post.imageList:post.imageList.slice(0,3)">
+    <template v-for="img in isShowAllImages ? post.imageList:post?.imageList?.slice(0,3) || []">
       <img class="img" :src="img" alt="image post" @click="displayImageFullScreen(img, post.imageList)">
     </template>
     <main-button
         class="post__more_img"
         @click="this.isShowAllImages = !this.isShowAllImages;"
-        v-if="post.imageList.length > maxShowImgInPost"
+        v-if="post?.imageList?.length > maxShowImgInPost"
     >{{ isShowAllImages ? '<<' : '>>' }}
     </main-button>
   </div>
   <p class="post__body">{{ post.body }}</p>
   <div class="post__button">
-    <edite-post :post="post"></edite-post>
+    <edit-post :post="post"></edit-post>
     <main-button
         @click="deletePost(post.id)"
     >
@@ -30,13 +30,13 @@
 <script>
 import {MAX_SHOW_IMG_IN_POST} from "@/components/const";
 import ShowImage from "@/components/ShowImageFullScreen.vue";
-import EditePost from "@/components/EditePost.vue";
+import EditPost from "@/components/EditPost.vue";
 
 
 export default {
   name: "Post",
   components: {
-    EditePost,
+    EditPost,
     ShowImage,
   },
   data() {
@@ -58,9 +58,6 @@ export default {
   methods: {
     deletePost(id) {
       this.$emit('create', id)
-    },
-    editePost(id) {
-
     },
     displayImageFullScreen(image, imageList) {
       this.imageFullScreen = image;
