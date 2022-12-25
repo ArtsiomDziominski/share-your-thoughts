@@ -6,7 +6,7 @@
         maxlength="40"
         v-model="post.title"
     ></main-input>
-    <select-file @create="addImages" :images="post.imageList"></select-file>
+    <choose-files @create="addImages" :images="post.imageList"></choose-files>
     <p>Комментарий</p>
     <textarea
         name="comment"
@@ -20,11 +20,11 @@
 </template>
 
 <script>
-import SelectFile from "@/components/SelectFile.vue";
+import ChooseFiles from "@/components/ChooseFiles.vue";
 
 export default {
   name: "ModalCreateAndEdit",
-  components: {SelectFile},
+  components: {ChooseFiles},
   props: {
     post: {
       type: Array,

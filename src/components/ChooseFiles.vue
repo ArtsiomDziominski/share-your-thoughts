@@ -1,6 +1,17 @@
 <template>
   <div class="select">
-    <input type="file" class="select__file" @change="selectFile($event)" multiple accept="image/*">
+    <label class="select__file_label" id="choose-files">
+      <img src="src/assets/add_photo_alternate.svg" alt="Choose files">
+      Choose a Pictures
+      <input
+          type="file"
+          class="select__file"
+          for="choose-files"
+          @change="selectFile($event)"
+          multiple
+          accept="image/*"
+      >
+    </label>
     <div class="select__img" id="img" v-for="img in images">
       <img
           class="img"
@@ -19,7 +30,7 @@
 
 <script>
 export default {
-  name: "SelectFile",
+  name: "ChooseFiles",
   props: {
     images: {
       type: Array,
@@ -54,9 +65,30 @@ export default {
 </script>
 
 <style scoped>
-.select__file {
+input[type="file"] {
+  display: none;
+}
+
+.select__file_label {
+  width: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
   margin: 0 0 10px 0;
-  display: block;
+  padding: 10px;
+  border: 1px solid var(--color-background-choose-files-border);
+  background-color: var(--color-background-choose-files);
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.select__file_label img {
+  width: 20px;
+  margin-right: 10px;
+}
+
+.select__file_label:hover {
+  background-color: var(--color-background-choose-files-border-hover);
 }
 
 .select__img {

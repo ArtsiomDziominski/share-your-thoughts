@@ -15,6 +15,10 @@
   --color-text: black;
 
   --input-border-bottom-color: black;
+
+  --color-background-choose-files: #eeeeee;
+  --color-background-choose-files-border: #c5c5c5;
+  --color-background-choose-files-border-hover: #fafafa;
 }
 
 body {
