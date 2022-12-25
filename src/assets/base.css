@@ -3,7 +3,8 @@
 
   --color-background-close-img: rgba(24, 24, 24, 0.5);
   --color-background-close-img-hover: rgb(24, 24, 24);
-  --color-border-img: rgba(0, 0, 0, 0.29);
+  --color-border-img: rgba(180, 180, 180, 0.3);
+  --color-border-img-colorless: rgba(180, 180, 180, 0.0);
 
   --color-background-full-screen-image: rgba(0, 0, 0, 0.9);
 
