@@ -68,9 +68,6 @@ export default {
 </script>
 
 <style scoped>
-input[type="file"] {
-  display: none;
-}
 
 .select__file_label {
   width: 50%;
@@ -82,7 +79,7 @@ input[type="file"] {
   border: 1px solid var(--color-background-choose-files-border);
   background-color: var(--color-background-choose-files);
   border-radius: 5px;
-  cursor: pointer;
+  position: relative;
 }
 
 .select__file_label img {
@@ -90,12 +87,20 @@ input[type="file"] {
   margin-right: 10px;
 }
 
+.select__file_label input[type="file"] {
+  position: absolute;
+  opacity: 0;
+  width: 100%;
+  height: 100%;
+  cursor: pointer;
+}
+
 .select__file_label:hover {
   background-color: var(--color-background-choose-files-border-hover);
 }
 
 .select__file_max_error {
-  color: var(--color-max-length-images);
+  color: var(--color-attention);
 }
 
 .select__img {
