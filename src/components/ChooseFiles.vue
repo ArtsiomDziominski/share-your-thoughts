@@ -12,6 +12,7 @@
           accept="image/*"
       >
     </label>
+    <p class="select__file_max_error" v-if="maxLengthImages">Максимально 8 картинок</p>
     <div class="select__img" id="img" v-for="img in images">
       <img
           class="img"
@@ -29,6 +30,8 @@
 </template>
 
 <script>
+import {MAX_IMAGES} from "@/components/const";
+
 export default {
   name: "ChooseFiles",
   props: {
@@ -40,19 +43,19 @@ export default {
   data() {
     return {
       selectedFile: null,
-      maxLengthImg: false
+      maxLengthImages: false
     }
   },
   methods: {
     selectFile(event) {
-      this.maxLengthImg = false;
+      this.maxLengthImages = false;
       this.selectedFile = event.target.files;
 
       for (let i = 0; i < this.selectedFile.length; i++) {
         const reader = new FileReader();
         reader.readAsDataURL(this.selectedFile[i]);
         reader.onload = (ev) => {
-          this.images.push(ev.target.result);
+          this.images.length < MAX_IMAGES ? this.images.push(ev.target.result) : this.maxLengthImages = true;
         }
       }
     },
@@ -89,6 +92,10 @@ input[type="file"] {
 
 .select__file_label:hover {
   background-color: var(--color-background-choose-files-border-hover);
+}
+
+.select__file_max_error {
+  color: var(--color-max-length-images);
 }
 
 .select__img {
