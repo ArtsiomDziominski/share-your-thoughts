@@ -7,12 +7,12 @@
 </template>
 
 <script>
-import SelectFile from "@/components/SelectFile.vue";
+import ChooseFiles from "@/components/ChooseFiles.vue";
 import ModalCreateAndEdit from "@/components/ModalCreateAndEdit.vue";
 
 export default {
   name: "EditPost",
-  components: {ModalCreateAndEdit, SelectFile},
+  components: {ModalCreateAndEdit, ChooseFiles},
   data() {
     return {
       dialogVisible: false,
