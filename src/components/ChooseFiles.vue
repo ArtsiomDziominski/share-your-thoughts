@@ -95,7 +95,7 @@ input[type="file"] {
 }
 
 .select__file_max_error {
-  color: var(--color-max-length-images);
+  color: var(--color-attention);
 }
 
 .select__img {
