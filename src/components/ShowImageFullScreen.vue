@@ -2,10 +2,10 @@
   <div class="wrapper" v-if="currentImage" @click="closeImageFullScreen">
     <img class="image" :src="currentImage" alt="image full screen">
     <img class="closeImage" src="src/assets/close.svg" @click.stop="closeImageFullScreen" alt="close">
-    <button class="left_arrow" @click.stop="leftImage" @keyup.left="leftImage">
+    <button class="left_arrow" @click.stop="nextImage(-1)" @keyup.left="nextImage(-1)">
       <img class="arrow_reverse" src="src/assets/arrow.svg" alt="arrow left">
     </button>
-    <button class="right_arrow" @click.stop="rightImage" @keyup.right="rightImage">
+    <button class="right_arrow" @click.stop="nextImage(1)" @keyup.right="nextImage(1)">
       <img src="src/assets/arrow.svg" alt="arrow right">
     </button>
   </div>
@@ -31,7 +31,7 @@ export default {
     }
   },
   watch: {
-    imageFullScreen(){
+    imageFullScreen() {
       this.currentImage = this.imageFullScreen;
     }
   },
@@ -40,22 +40,20 @@ export default {
       this.currentImage = '';
       this.$emit('update:imageFullScreen', this.currentImage)
     },
-    leftImage() {
-      for (let i = 0; i < this.imageList.length; i++) {
-        if (this.currentImage === this.imageList[i]) {
-          this.currentImage = this.imageList[i - 1];
-          break
-        }
+    nextImage(nextImage) {
+      const indexImage = this.imageList.indexOf(this.currentImage);
+
+      switch (indexImage) {
+        case this.imageList.length - nextImage:
+          this.currentImage = this.imageList[0];
+          break;
+        case nextImage + 1:
+          this.currentImage = this.imageList[this.imageList.length - 1];
+          break;
+        default:
+          this.currentImage = this.imageList[indexImage + nextImage];
       }
     },
-    rightImage() {
-      for (let i = 0; i < this.imageList.length; i++) {
-        if (this.currentImage === this.imageList[i]) {
-          this.currentImage = this.imageList[i + 1];
-          break
-        }
-      }
-    }
   }
 }
 </script>
