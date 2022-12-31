@@ -1,4 +1,5 @@
 <template>
+  <header-site></header-site>
   <create-post @create="addPost"></create-post>
   <transition-group name="post-list">
     <div class="post" v-for="post in posts" :post="post" :key="post.id">
@@ -15,9 +16,11 @@
 import CreatePost from "@/components/CreatePost.vue";
 import {TEXT_1} from "@/components/const";
 import Post from "@/components/Post.vue";
+import HeaderSite from "@/components/header/HeaderSite.vue";
 
 export default {
   components: {
+    HeaderSite,
     Post,
     CreatePost,
   },
