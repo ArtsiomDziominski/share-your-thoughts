@@ -1,30 +1,29 @@
 <template>
-  <modal-dialog @click="showModal()">
+  <modal-dialog @click="closeModalLogin">
     <login-input class="login">Login</login-input>
     <login-input-password class="login"></login-input-password>
-    <a @click="showModal()">Регистрация</a>
-    <login-button class="login-button" @click="showModal()">Войти</login-button>
+    <a @click="closeModalLogin">Регистрация</a>
+    <login-button class="login-button" @click="closeModalLogin">Войти</login-button>
   </modal-dialog>
 </template>
 
 <script>
-import LoginInput from "@/components/UI/LoginInput.vue";
-import LoginInputPassword from "@/components/UI/header/LoginInputPassword.vue";
-import LoginButton from "@/components/UI/header/LoginButton.vue";
-
 export default {
   name: "ModalLogin",
-  components: {LoginButton, LoginInputPassword, LoginInput},
   props: {
     isShowDialogLogin: {
       type: Boolean,
       default: false
     }
   },
-  methods: {
-    showModal() {
-      this.$emit('update:isShowDialogLogin', false);
+  data() {
+    return {
     }
+  },
+  methods: {
+    closeModalLogin() {
+      this.$emit('update:isShowDialogLogin', false);
+    },
   }
 }
 </script>
