@@ -1,15 +1,23 @@
 <template>
   <header>
     <login-avatar></login-avatar>
+    <modal-registration v-if="isShowDialogRegistration"></modal-registration>
   </header>
 </template>
 
 <script>
-import LoginAvatar from "@/components/header/LoginAvatar.vue";
-
 export default {
   name: "HeaderSite",
-  components: {LoginAvatar}
+  data() {
+    return {
+      isShowDialogRegistration: true
+    }
+  },
+  methods: {
+    showModalRegistration() {
+      this.isShowDialogRegistration = true;
+    }
+  }
 }
 </script>
 
