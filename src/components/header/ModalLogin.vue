@@ -2,12 +2,14 @@
   <modal-dialog @click="closeModalLogin">
     <login-input class="login">Login</login-input>
     <login-input-password class="login"></login-input-password>
-    <a @click="closeModalLogin">Регистрация</a>
+    <a @click="toggleModalWindowRegistration">Регистрация</a>
     <login-button class="login-button" @click="closeModalLogin">Войти</login-button>
   </modal-dialog>
 </template>
 
 <script>
+import {mapActions, mapGetters} from "vuex";
+
 export default {
   name: "ModalLogin",
   props: {
@@ -20,7 +22,18 @@ export default {
     return {
     }
   },
+  computed: {
+    ...mapGetters([
+      'STATE_MODAL_WINDOW_REGISTRATION'
+    ])
+  },
   methods: {
+    ...mapActions([
+      'TOGGLE_MODAL_WINDOW_REGISTRATION'
+    ]),
+    toggleModalWindowRegistration() {
+      this.TOGGLE_MODAL_WINDOW_REGISTRATION();
+    },
     closeModalLogin() {
       this.$emit('update:isShowDialogLogin', false);
     },

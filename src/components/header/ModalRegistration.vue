@@ -1,25 +1,26 @@
 <template>
-  <modal-dialog @click="showModal()">
+  <modal-dialog v-if="STATE_MODAL_WINDOW_REGISTRATION" @click="TOGGLE_MODAL_WINDOW_REGISTRATION">
     <login-input class="login">Login</login-input>
     <login-input-password class="registration-password"></login-input-password>
     <login-input-password class="registration-password"></login-input-password>
-    <login-button class="registration-button" @click="showModal()">Регистрация</login-button>
+    <login-button class="registration-button" @click="TOGGLE_MODAL_WINDOW_REGISTRATION">Регистрация</login-button>
   </modal-dialog>
 </template>
 
 <script>
+import {mapActions, mapGetters} from "vuex";
+
 export default {
   name: "ModalRegistration",
-  props: {
-    isShowDialogRegistration: {
-      type: Boolean,
-      default: false
-    }
+  computed: {
+    ...mapGetters([
+      'STATE_MODAL_WINDOW_REGISTRATION'
+    ])
   },
   methods: {
-    showModal() {
-      this.$emit('update:isShowDialogRegistration', false);
-    }
+    ...mapActions([
+      'TOGGLE_MODAL_WINDOW_REGISTRATION'
+    ]),
   }
 }
 </script>
