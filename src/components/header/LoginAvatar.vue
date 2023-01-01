@@ -1,20 +1,25 @@
 <template>
-  <button @click="isShowDialogLogin=true">
+  <button @click="TOGGLE_MODAL_WINDOW_LOGIN">
     <img src="src/assets/account-avatar.svg" alt="avatar">
   </button>
-  <modal-login v-if="isShowDialogLogin" v-model:is-show-dialog-login="isShowDialogLogin"></modal-login>
+  <modal-login></modal-login>
 </template>
 
 <script>
 import ModalLogin from "@/components/header/ModalLogin.vue";
+import {mapActions} from "vuex";
 
 export default {
   name: "LoginAvatar",
   components: {ModalLogin},
   data() {
     return {
-      isShowDialogLogin: false,
     }
+  },
+  methods: {
+    ...mapActions([
+      'TOGGLE_MODAL_WINDOW_LOGIN'
+    ]),
   }
 }
 </script>
