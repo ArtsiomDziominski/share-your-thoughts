@@ -1,9 +1,9 @@
 <template>
-  <modal-dialog v-if="STATE_MODAL_WINDOW_REGISTRATION" @click="TOGGLE_MODAL_WINDOW_REGISTRATION">
+  <modal-dialog v-if="stateModalWindowRegistration" @click="toggleModalWindowRegistration">
     <login-input class="login">Login</login-input>
     <login-input-password class="registration-password"></login-input-password>
     <login-input-password class="registration-password"></login-input-password>
-    <login-button class="registration-button" @click="TOGGLE_MODAL_WINDOW_REGISTRATION">Регистрация</login-button>
+    <login-button class="registration-button" @click="toggleModalWindowRegistration">Регистрация</login-button>
   </modal-dialog>
 </template>
 
@@ -13,13 +13,13 @@ import {mapActions, mapGetters} from "vuex";
 export default {
   name: "ModalRegistration",
   computed: {
-    ...mapGetters([
-      'STATE_MODAL_WINDOW_REGISTRATION'
+    ...mapGetters('storeMenuLoginRegistration', [
+      'stateModalWindowRegistration'
     ])
   },
   methods: {
-    ...mapActions([
-      'TOGGLE_MODAL_WINDOW_REGISTRATION'
+    ...mapActions('storeMenuLoginRegistration', [
+      'toggleModalWindowRegistration',
     ]),
   }
 }
