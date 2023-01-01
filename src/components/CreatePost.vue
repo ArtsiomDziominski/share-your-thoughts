@@ -1,8 +1,8 @@
 <template>
-  <main-button class="create_post" @click="TOGGLE_MODAL_WINDOW_CREATE_EDIT_POST">Создать пост</main-button>
+  <main-button class="create_post" @click="toggleModalWindowCreateOrEditPost">Создать пост</main-button>
   <modal-create-and-edit
-      v-if="STATE_MODAL_WINDOW_CREATE_EDIT_POST"
-      @click="TOGGLE_MODAL_WINDOW_CREATE_EDIT_POST"
+      v-if="stateModalWindowCreateOrEditPost"
+      @click="toggleModalWindowCreateOrEditPost"
   >
     <main-button @click="createPost">Создать</main-button>
   </modal-create-and-edit>
@@ -26,12 +26,14 @@ export default {
       },
     }
   },
-  methods: {
-    ...mapGetters([
-        'STATE_MODAL_WINDOW_CREATE_EDIT_POST'
+  computed: {
+    ...mapGetters('storeCreateOrEditPost', [
+      'stateModalWindowCreateOrEditPost'
     ]),
-    ...mapActions([
-        'TOGGLE_MODAL_WINDOW_CREATE_EDIT_POST'
+  },
+  methods: {
+    ...mapActions('storeCreateOrEditPost', [
+      'toggleModalWindowCreateOrEditPost'
     ]),
     createPost() {
       this.post.id = Date.now();
@@ -40,7 +42,7 @@ export default {
         body: '',
         imgList: []
       }
-      this.TOGGLE_MODAL_WINDOW_CREATE_EDIT_POST();
+      this.toggleModalWindowCreateOrEditPost();
     },
     addImages(images) {
       this.post.imageList = images;
@@ -50,9 +52,5 @@ export default {
 </script>
 
 <style scoped>
-.create_post {
-  margin-top: 30px;
-  display: flex;
-  justify-content: flex-end;
-}
+
 </style>
