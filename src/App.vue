@@ -1,20 +1,8 @@
 <template>
   <header-site></header-site>
-  <create-post @create="addPost"></create-post>
-  <transition-group name="post-list">
-    <div class="post" v-for="post in posts" :post="post" :key="post.id">
-      <post
-          :post="post"
-          @create="deletePost"
-      >
-      </post>
-    </div>
-  </transition-group>
 </template>
 
 <script>
-import CreatePost from "@/components/CreatePost.vue";
-import {TEXT_1} from "@/components/const";
 import Post from "@/components/Post.vue";
 import HeaderSite from "@/components/header/HeaderSite.vue";
 
@@ -22,30 +10,8 @@ export default {
   components: {
     HeaderSite,
     Post,
-    CreatePost,
-  },
-  data() {
-    return {
-      posts: [
-        {
-          id: 1,
-          title: 'Hello World',
-          body: TEXT_1,
-          imageList: ['src/assets/logo.svg', 'src/assets/img1.png', 'src/assets/img2.png', 'src/assets/img3.png', 'src/assets/img4.png'],
-        }
-      ],
-    }
-  },
-  methods: {
-    addPost(post) {
-      this.posts.push(post)
-    },
-    deletePost(id) {
-      this.posts = this.posts.filter((post) => post.id !== id);
-    },
-  },
+  }
 }
-
 </script>
 
 <style scoped>
