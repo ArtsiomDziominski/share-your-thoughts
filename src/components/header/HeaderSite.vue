@@ -1,5 +1,6 @@
 <template>
   <header>
+    <create-post ></create-post>
     <login-avatar></login-avatar>
     <modal-login></modal-login>
     <modal-registration></modal-registration>
