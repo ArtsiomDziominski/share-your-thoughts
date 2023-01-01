@@ -1,9 +1,9 @@
 <template>
-  <modal-dialog @click="closeModalLogin">
+  <modal-dialog v-if="STATE_MODAL_WINDOW_LOGIN" @click="TOGGLE_MODAL_WINDOW_LOGIN">
     <login-input class="login">Login</login-input>
-    <login-input-password class="login"></login-input-password>
-    <a @click="toggleModalWindowRegistration">Регистрация</a>
-    <login-button class="login-button" @click="closeModalLogin">Войти</login-button>
+    <login-input-password class="login-password"></login-input-password>
+    <a class="registration-button" @click="clickRegistration()">Регистрация</a>
+    <login-button class="login-button" @click="TOGGLE_MODAL_WINDOW_LOGIN">Войти</login-button>
   </modal-dialog>
 </template>
 
@@ -12,41 +12,42 @@ import {mapActions, mapGetters} from "vuex";
 
 export default {
   name: "ModalLogin",
-  props: {
-    isShowDialogLogin: {
-      type: Boolean,
-      default: false
-    }
-  },
-  data() {
-    return {
-    }
-  },
   computed: {
     ...mapGetters([
-      'STATE_MODAL_WINDOW_REGISTRATION'
+      'STATE_MODAL_WINDOW_LOGIN'
     ])
   },
   methods: {
     ...mapActions([
-      'TOGGLE_MODAL_WINDOW_REGISTRATION'
+      'TOGGLE_MODAL_WINDOW_REGISTRATION',
+      'TOGGLE_MODAL_WINDOW_LOGIN',
     ]),
-    toggleModalWindowRegistration() {
+    clickRegistration() {
       this.TOGGLE_MODAL_WINDOW_REGISTRATION();
-    },
-    closeModalLogin() {
-      this.$emit('update:isShowDialogLogin', false);
-    },
+      this.TOGGLE_MODAL_WINDOW_LOGIN();
+    }
   }
 }
 </script>
 
 <style scoped>
-.login {
+.login, .login-password {
   margin: 20px 0;
 }
 
 .login-button {
   margin: 20px 0 0 20px;
+}
+
+.registration-button {
+  cursor: pointer;
+}
+
+.registration-button:hover {
+  color: #215cf3;
+}
+
+.registration-button:active {
+  color: rgb(19, 36, 180);
 }
 </style>

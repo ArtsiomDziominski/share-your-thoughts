@@ -1,13 +1,13 @@
 import App from './App.vue'
 import {createApp} from 'vue'
 import components from '@/components/UI'
-import store from './store'
+import storeMenuLoginRegistration from './store/store.menu-login-registration'
 
 import './assets/main.css'
 
 
 const app = createApp(App)
-app.use(store)
+app.use(storeMenuLoginRegistration)
 
 components.forEach(component => {
     app.component(component.name, component)
