@@ -1,9 +1,8 @@
 <template>
-  <main-button class="create_post" @click="dialogVisible = true">Создать пост</main-button>
+  <main-button class="create_post" @click="toggleModalWindowCreateOrEditPost">Создать пост</main-button>
   <modal-create-and-edit
-      v-if="dialogVisible"
-      v-model:post="post"
-      @click="dialogVisible = false"
+      v-if="stateModalWindowCreateOrEditPost"
+      @click="toggleModalWindowCreateOrEditPost"
   >
     <main-button @click="createPost">Создать</main-button>
   </modal-create-and-edit>
@@ -11,6 +10,7 @@
 
 <script>
 import ModalCreateAndEdit from "@/components/ModalCreateAndEdit.vue";
+import {mapActions, mapGetters} from "vuex";
 
 export default {
   name: "CreatePost",
@@ -26,16 +26,23 @@ export default {
       },
     }
   },
+  computed: {
+    ...mapGetters('storeCreateOrEditPost', [
+      'stateModalWindowCreateOrEditPost'
+    ]),
+  },
   methods: {
+    ...mapActions('storeCreateOrEditPost', [
+      'toggleModalWindowCreateOrEditPost'
+    ]),
     createPost() {
       this.post.id = Date.now();
-      this.$emit('create', this.post);
       this.post = {
         title: '',
         body: '',
         imgList: []
       }
-      this.dialogVisible=false;
+      this.toggleModalWindowCreateOrEditPost();
     },
     addImages(images) {
       this.post.imageList = images;
@@ -45,9 +52,5 @@ export default {
 </script>
 
 <style scoped>
-.create_post {
-  margin-top: 30px;
-  display: flex;
-  justify-content: flex-end;
-}
+
 </style>

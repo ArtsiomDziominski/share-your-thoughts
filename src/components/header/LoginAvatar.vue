@@ -1,5 +1,5 @@
 <template>
-  <button @click="TOGGLE_MODAL_WINDOW_LOGIN">
+  <button @click="toggleModalWindowLogin">
     <img src="src/assets/account-avatar.svg" alt="avatar">
   </button>
   <modal-login></modal-login>
@@ -17,8 +17,8 @@ export default {
     }
   },
   methods: {
-    ...mapActions([
-      'TOGGLE_MODAL_WINDOW_LOGIN'
+    ...mapActions('storeMenuLoginRegistration',[
+      'toggleModalWindowLogin'
     ]),
   }
 }
