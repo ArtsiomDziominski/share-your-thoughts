@@ -1,6 +1,6 @@
 <template>
   <div class="input-group">
-    <input required="" type="text" name="text" autocomplete="off" class="input">
+    <input required="" type="text" name="text" autocomplete="off" class="input" v-model="modelValue" @input="updateInput">
     <label class="user-label">
       <slot></slot>
     </label>
@@ -9,7 +9,17 @@
 
 <script>
 export default {
-  name: "LoginInput"
+  name: "LoginInput",
+  data() {
+    return{
+      modelValue:''
+    }
+  },
+  methods: {
+    updateInput() {
+      this.$emit('update:modelValue', this.modelValue)
+    }
+  }
 }
 </script>
 
@@ -25,7 +35,7 @@ export default {
   padding: 1rem;
   font-size: 1rem;
   color: #000000;
-  transition: border 150ms cubic-bezier(0.4,0,0.2,1);
+  transition: border 150ms cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .user-label {
@@ -34,7 +44,7 @@ export default {
   color: #a2a2a2;
   pointer-events: none;
   transform: translateY(1rem);
-  transition: 150ms cubic-bezier(0.4,0,0.2,1);
+  transition: 150ms cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .input:focus, input:valid {
