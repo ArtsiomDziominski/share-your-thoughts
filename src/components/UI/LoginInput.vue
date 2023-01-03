@@ -1,9 +1,10 @@
 <template>
   <div class="input-group">
-    <input required="" type="text" name="text" autocomplete="off" class="input" v-model="modelValue" @input="updateInput">
-    <label class="user-label">
-      <slot></slot>
-    </label>
+      <input required="required" type="text" name="text" autocomplete="off" class="input" v-model="modelValue"
+             @input="updateInput">
+      <label class="user-label">
+        <slot></slot>
+      </label>
   </div>
 </template>
 
@@ -11,8 +12,8 @@
 export default {
   name: "LoginInput",
   data() {
-    return{
-      modelValue:''
+    return {
+      modelValue: ''
     }
   },
   methods: {
