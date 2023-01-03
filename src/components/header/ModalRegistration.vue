@@ -1,13 +1,15 @@
 <template>
   <modal-dialog v-if="stateModalWindowRegistration" @click="toggleModalWindowRegistration">
-    <login-input class="login" v-model="params.login">Login</login-input>
-    <login-input-password class="registration-password" v-model="params.password"></login-input-password>
-    <login-input-password class="registration-password" v-model="passwordControl"></login-input-password>
-    <login-button class="registration-button" @click="regUser">Регистрация</login-button>
-    <template v-for="error in errorMessage">
-      <p class="error">{{ error.path }} обязателен</p>
-    </template>
-    <p class="error">{{ error }}</p>
+    <form v-on:submit.prevent>
+      <login-input class="login" v-model="params.login">Login</login-input>
+      <login-input-password class="registration-password" v-model="params.password"></login-input-password>
+      <login-input-password class="registration-password" v-model="passwordControl"></login-input-password>
+      <login-button class="registration-button" @click="regUser">Регистрация</login-button>
+      <template v-for="error in errorMessage">
+        <p class="error">{{ error.path }} обязателен</p>
+      </template>
+      <p class="error">{{ error }}</p>
+    </form>
   </modal-dialog>
 </template>
 
