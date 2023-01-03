@@ -1,6 +1,6 @@
 <template>
   <div class="input-group">
-    <input required="" type="password" name="text" autocomplete="off" class="input" v-model="modelValue" @input="updateInput">
+    <input required="required" type="password" name="text" autocomplete="off" class="input" v-model="modelValue" @input="updateInput">
     <label class="user-label">
       Password
     </label>
