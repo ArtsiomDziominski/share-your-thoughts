@@ -1,6 +1,6 @@
 <template>
   <div class="input-group">
-    <input required="" type="password" name="text" autocomplete="off" class="input">
+    <input required="" type="password" name="text" autocomplete="off" class="input" v-model="modelValue" @input="updateInput">
     <label class="user-label">
       Password
     </label>
@@ -9,7 +9,17 @@
 
 <script>
 export default {
-  name: "LoginInputPassword"
+  name: "LoginInputPassword",
+  data() {
+    return{
+      modelValue:''
+    }
+  },
+  methods: {
+    updateInput() {
+      this.$emit('update:modelValue', this.modelValue)
+    }
+  }
 }
 </script>
 
