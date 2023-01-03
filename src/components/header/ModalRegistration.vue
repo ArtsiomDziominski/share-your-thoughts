@@ -3,17 +3,17 @@
     <login-input class="login" v-model="params.login">Login</login-input>
     <login-input-password class="registration-password" v-model="params.password"></login-input-password>
     <login-input-password class="registration-password" v-model="passwordControl"></login-input-password>
-    <login-button class="registration-button" @click="checkParams">Регистрация</login-button>
+    <login-button class="registration-button" @click="regUser">Регистрация</login-button>
     <template v-for="error in errorMessage">
       <p class="error">{{ error.path }} обязателен</p>
     </template>
-    <p class="error">{{ errorPassword }}</p>
+    <p class="error">{{ error }}</p>
   </modal-dialog>
 </template>
 
 <script>
 import {mapActions, mapGetters} from "vuex";
-import {ERROR_VALID_LIGIN_PASSWORD} from "@/const/message";
+import {ERROR_VALID_LOGIN_PASSWORD, LOGIN_REPEAT} from "@/const/message";
 
 export default {
   name: "ModalRegistration",
@@ -25,27 +25,36 @@ export default {
       },
       passwordControl: '',
       errorMessage: [],
-      errorPassword: '',
+      error: '',
     }
   },
   computed: {
     ...mapGetters('storeMenuLoginRegistration', ['stateModalWindowRegistration']),
     ...mapGetters('requestServer', ['requestCreateUser']),
-    ...mapGetters('registration', ['checkValidLoginPassword']),
+    ...mapGetters('registration', ['checkValidLoginPassword', 'checkUserRepeat']),
   },
   methods: {
     ...mapActions('storeMenuLoginRegistration', [
       'toggleModalWindowRegistration',
     ]),
-    checkParams() {
+    async checkUserLoginRepeat() {
+      await this.checkUserRepeat(this.params.login)
+          .then(() => {
+            this.createNewUser();
+          })
+          .catch(() => {
+            this.error = LOGIN_REPEAT;
+          })
+    },
+    regUser() {
       this.errorMessage = [];
-      this.errorPassword = '';
-      this.checkValidLoginPassword(this.params.login, this.params.password, this.passwordControl) ?
-          this.createNewUser() :
-          this.errorPassword = ERROR_VALID_LIGIN_PASSWORD;
+      this.error = '';
+      this.checkValidLoginPassword(this.params, this.passwordControl) ?
+          this.checkUserLoginRepeat() :
+          this.error = ERROR_VALID_LOGIN_PASSWORD;
     },
     async createNewUser() {
-      await this.requestCreateUser(this.params)
+      this.requestCreateUser(this.params)
           .then(() => {
             this.toggleModalWindowRegistration();
           })
