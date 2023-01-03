@@ -1,0 +1,1 @@
+export const ERROR_VALID_LIGIN_PASSWORD = 'Login/Password введён некорректно';
