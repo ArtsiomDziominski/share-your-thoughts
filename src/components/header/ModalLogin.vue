@@ -1,9 +1,11 @@
 <template>
   <modal-dialog v-if="stateModalWindowLogin" @click="toggleModalWindowLogin">
-    <login-input class="login">Login</login-input>
-    <login-input-password class="login-password"></login-input-password>
-    <a class="registration-button" @click="clickRegistration()">Регистрация</a>
-    <login-button class="login-button" @click="toggleModalWindowLogin">Войти</login-button>
+    <form v-on:submit.prevent="loginUser()">
+      <login-input class="login">Login</login-input>
+      <login-input-password class="login-password"></login-input-password>
+      <a class="registration-button" @click="clickRegistration()">Регистрация</a>
+      <login-button class="login-button">Войти</login-button>
+    </form>
   </modal-dialog>
 </template>
 
@@ -24,6 +26,9 @@ export default {
     ]),
     clickRegistration() {
       this.toggleModalWindowRegistration();
+      this.toggleModalWindowLogin();
+    },
+    loginUser() {
       this.toggleModalWindowLogin();
     }
   }
