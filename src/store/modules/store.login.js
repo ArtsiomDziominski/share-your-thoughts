@@ -1,13 +1,13 @@
 import axios from "axios";
-import {HEADER_REQUEST, CREATE_USER, URL} from "@/const/const.request-server";
+import {HEADER_REQUEST, LOGIN_USER, URL} from "@/const/const.request-server";
 
 const state = () => ({})
 
 const getters = {
-    requestCreateUser: () => (params) => {
-        return axios.post(URL + CREATE_USER, {
+    requestLoginUser: () => (params) => {
+        return axios.post(URL + LOGIN_USER, {
             login: params.login,
-            password: params.password
+            password: params.password,
         }, {headers: HEADER_REQUEST})
     },
 }
