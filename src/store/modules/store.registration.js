@@ -1,5 +1,5 @@
 import axios from "axios";
-import {GET_USER_NAME, URL} from "@/components/const";
+import {GET_USER_NAME, URL} from "@/const/const.request-server";
 
 const state = () => ({})
 
@@ -10,7 +10,7 @@ const getters = {
     checkUserRepeat: () => (login) => {
         return axios.post(URL + GET_USER_NAME, {
             login: login,
-        }, {headers: {'Content-Type': 'application/x-www-form-urlencoded'}})
+        }, {headers: {HEADER_REQUEST}})
     },
 
 }

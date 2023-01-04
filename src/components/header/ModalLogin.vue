@@ -1,5 +1,5 @@
 <template>
-  <modal-dialog v-if="stateModalWindowLogin" @click="toggleModalWindowLogin">
+  <modal-dialog v-if="stateModalWindowLogin" @click="loginUser">
     <form v-on:submit.prevent="loginUser()">
       <login-input class="login">Login</login-input>
       <login-input-password class="login-password"></login-input-password>
@@ -14,10 +14,17 @@ import {mapActions, mapGetters} from "vuex";
 
 export default {
   name: "ModalLogin",
+  data() {
+    return {
+      params: {
+        login: '',
+        password: ''
+      }
+    }
+  },
   computed: {
-    ...mapGetters('storeMenuLoginRegistration', [
-      'stateModalWindowLogin'
-    ])
+    ...mapGetters('storeMenuLoginRegistration', ['stateModalWindowLogin']),
+    ...mapGetters('loginUser', ['requestLoginUser']),
   },
   methods: {
     ...mapActions('storeMenuLoginRegistration', [
@@ -28,8 +35,10 @@ export default {
       this.toggleModalWindowRegistration();
       this.toggleModalWindowLogin();
     },
-    loginUser() {
-      this.toggleModalWindowLogin();
+    async loginUser() {
+      await this.requestLoginUser(this.params)
+          .then(res => console.log(res))
+      await this.toggleModalWindowLogin();
     }
   }
 }
