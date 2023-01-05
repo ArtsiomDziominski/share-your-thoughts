@@ -1,69 +1,50 @@
 <template>
   <modal-dialog v-if="stateModalWindowRegistration" @click="toggleModalWindowRegistration">
     <form v-on:submit.prevent>
-      <login-input class="login" v-model="params.login">Login</login-input>
-      <login-input-password class="registration-password" v-model="params.password"></login-input-password>
+      <login-input class="login" v-model="UserCandidate.login">Login</login-input>
+      <login-input-password class="registration-password" v-model="UserCandidate.password"></login-input-password>
       <login-input-password class="registration-password" v-model="passwordControl"></login-input-password>
-      <login-button class="registration-button" @click="regUser">Регистрация</login-button>
-      <template v-for="error in errorMessage">
-        <p class="error">{{ error.path }} обязателен</p>
-      </template>
-      <p class="error">{{ error }}</p>
+      <login-button class="registration-button" @click="createNewUser">Регистрация</login-button>
+      <p class="error">{{ errorMessage }}</p>
     </form>
   </modal-dialog>
 </template>
 
 <script>
 import {mapActions, mapGetters} from "vuex";
-import {ERROR_VALID_LOGIN_PASSWORD, LOGIN_REPEAT} from "@/const/message";
+import {PASSWORD_NOT_MATCH} from "@/const/message";
 
 export default {
   name: "ModalRegistration",
   data() {
     return {
-      params: {
+      UserCandidate: {
         login: '',
         password: ''
       },
       passwordControl: '',
-      errorMessage: [],
-      error: '',
+      errorMessage: '',
+      messageServer: '',
     }
   },
   computed: {
     ...mapGetters('storeMenuLoginRegistration', ['stateModalWindowRegistration']),
     ...mapGetters('requestServer', ['requestCreateUser']),
-    ...mapGetters('registration', ['checkValidLoginPassword', 'checkUserRepeat']),
   },
   methods: {
-    ...mapActions('storeMenuLoginRegistration', [
-      'toggleModalWindowRegistration',
-    ]),
-    async checkUserLoginRepeat() {
-      await this.checkUserRepeat(this.params.login)
-          .then(() => {
-            this.createNewUser();
-          })
-          .catch(() => {
-            this.error = LOGIN_REPEAT;
-          })
-    },
-    regUser() {
-      this.errorMessage = [];
-      this.error = '';
-      this.checkValidLoginPassword(this.params, this.passwordControl) ?
-          this.checkUserLoginRepeat() :
-          this.error = ERROR_VALID_LOGIN_PASSWORD;
-    },
-    async createNewUser() {
-      this.requestCreateUser(this.params)
-          .then(() => {
-            this.toggleModalWindowRegistration();
-          })
-          .catch((e) => {
-            const error = JSON.parse(e.request.response)
-            this.errorMessage = error.errors
-          })
+    ...mapActions('storeMenuLoginRegistration', ['toggleModalWindowRegistration']),
+    createNewUser() {
+      this.errorMessage = '';
+      this.UserCandidate.password === this.passwordControl ?
+          this.requestCreateUser(this.UserCandidate)
+              .then((result) => {
+                this.messageServer = result.data;
+                this.toggleModalWindowRegistration();
+              })
+              .catch((err) => {
+                this.errorMessage = err.response.data;
+              }) :
+          this.errorMessage = PASSWORD_NOT_MATCH;
     }
   }
 }

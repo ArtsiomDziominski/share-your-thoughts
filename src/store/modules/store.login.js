@@ -5,6 +5,7 @@ const state = () => ({})
 
 const getters = {
     requestLoginUser: () => (params) => {
+        console.log(params)
         return axios.post(URL + LOGIN_USER, {
             login: params.login,
             password: params.password,
