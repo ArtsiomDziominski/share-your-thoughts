@@ -1,23 +1,46 @@
 <template>
-  <button @click="toggleModalWindowLogin">
+  <button @click="checkUserLogin">
     <img src="src/assets/account-avatar.svg" alt="avatar">
   </button>
   <modal-login></modal-login>
+  <modal-info-user :user="user"></modal-info-user>
 </template>
 
 <script>
 import ModalLogin from "@/components/header/ModalLogin.vue";
-import {mapActions} from "vuex";
+import {mapActions, mapGetters} from "vuex";
+import ModalInfoUser from "@/components/header/ModalInfoUser.vue";
+import {TOKEN} from "@/const/const";
 
 export default {
   name: "LoginAvatar",
-  components: {ModalLogin},
+  components: {ModalInfoUser, ModalLogin},
   data() {
     return {
+      user: {
+        login: '',
+        posts: [],
+        phone: '',
+        mail: '',
+      }
     }
   },
+  computed: {
+    ...mapGetters('storeInfoUser', ['getUserInfo']),
+  },
   methods: {
-    ...mapActions('loginUser',['toggleModalWindowLogin']),
+    ...mapActions('loginUser', ['toggleModalWindowLogin']),
+    ...mapActions('storeInfoUser', ['toggleModalWindowInfoUser']),
+    checkUserLogin() {
+      const token = localStorage.getItem(TOKEN);
+      this.getUserInfo(token)
+          .then((userInfo) => {
+            this.user = userInfo.data;
+            this.toggleModalWindowInfoUser();
+          })
+          .catch(() => this.toggleModalWindowLogin())
+
+    }
   }
 }
 </script>
