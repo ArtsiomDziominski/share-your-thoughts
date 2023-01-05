@@ -28,7 +28,7 @@
 </template>
 
 <script>
-import {MAX_SHOW_IMG_IN_POST} from "@/components/const";
+import {MAX_SHOW_IMG_IN_POST} from "@/const/const";
 import ShowImage from "@/components/ShowImageFullScreen.vue";
 import EditPost from "@/components/EditPost.vue";
 
