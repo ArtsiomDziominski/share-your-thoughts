@@ -28,11 +28,11 @@ export default {
     }
   },
   computed: {
-    ...mapGetters('storeMenuLoginRegistration', ['stateModalWindowRegistration']),
+    ...mapGetters('storeRegistration', ['stateModalWindowRegistration']),
     ...mapGetters('requestServer', ['requestCreateUser']),
   },
   methods: {
-    ...mapActions('storeMenuLoginRegistration', ['toggleModalWindowRegistration']),
+    ...mapActions('storeRegistration', ['toggleModalWindowRegistration']),
     createNewUser() {
       this.errorMessage = '';
       this.UserCandidate.password === this.passwordControl ?

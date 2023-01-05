@@ -30,7 +30,7 @@
 </template>
 
 <script>
-import {MAX_IMAGES} from "@/components/const";
+import {MAX_IMAGES} from "@/const/const";
 
 export default {
   name: "ChooseFiles",

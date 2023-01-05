@@ -1,20 +1,38 @@
 import axios from "axios";
 import {HEADER_REQUEST, LOGIN_USER, URL} from "@/const/const.request-server";
 
-const state = () => ({})
+const state = () => ({
+    isShowDialogLogin: false
+})
 
 const getters = {
-    requestLoginUser: () => (params) => {
-        console.log(params)
+    requestLoginUser: () => (user) => {
         return axios.post(URL + LOGIN_USER, {
-            login: params.login,
-            password: params.password,
+            login: user.login,
+            password: user.password,
         }, {headers: HEADER_REQUEST})
     },
+    stateModalWindowLogin(state) {
+        return state.isShowDialogLogin;
+    }
+}
+
+const actions  = {
+    async toggleModalWindowLogin({commit}) {
+        commit('changeModalWindowLogin')
+    }
+}
+
+const mutations = {
+    changeModalWindowLogin: (state) => {
+        state.isShowDialogLogin = !state.isShowDialogLogin;
+    }
 }
 
 export default {
     namespaced: true,
     state,
     getters,
+    actions,
+    mutations,
 }

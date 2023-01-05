@@ -17,9 +17,7 @@ export default {
     }
   },
   methods: {
-    ...mapActions('storeMenuLoginRegistration',[
-      'toggleModalWindowLogin'
-    ]),
+    ...mapActions('loginUser',['toggleModalWindowLogin']),
   }
 }
 </script>
