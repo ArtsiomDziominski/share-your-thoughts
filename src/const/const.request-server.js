@@ -5,3 +5,4 @@ export const CREATE_POST = '/post';
 export const CREATE_USER = '/auth/create-user';
 export const GET_USER = '/auth/get-user-info';
 export const LOGIN_USER = '/auth/login-user';
+export const UPDATE_USER_INFO = '/auth/update-user-contacts';

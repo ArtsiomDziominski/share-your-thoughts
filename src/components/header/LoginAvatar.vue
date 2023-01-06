@@ -7,14 +7,13 @@
 </template>
 
 <script>
-import ModalLogin from "@/components/header/ModalLogin.vue";
 import {mapActions, mapGetters} from "vuex";
 import ModalInfoUser from "@/components/header/ModalInfoUser.vue";
-import {TOKEN} from "@/const/const";
+import ModalLogin from "@/components/header/ModalLogin.vue";
 
 export default {
   name: "LoginAvatar",
-  components: {ModalInfoUser, ModalLogin},
+  components: {ModalLogin, ModalInfoUser},
   data() {
     return {
       user: {
@@ -32,8 +31,7 @@ export default {
     ...mapActions('loginUser', ['toggleModalWindowLogin']),
     ...mapActions('storeInfoUser', ['toggleModalWindowInfoUser']),
     checkUserLogin() {
-      const token = localStorage.getItem(TOKEN);
-      this.getUserInfo(token)
+      this.getUserInfo()
           .then((userInfo) => {
             this.user = userInfo.data;
             this.toggleModalWindowInfoUser();
