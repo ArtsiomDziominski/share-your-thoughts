@@ -2,20 +2,30 @@
   <modal-dialog v-if="stateModalWindowInfoUser" @click="toggleModalWindowInfoUser">
     <p><strong>Login:</strong> {{ user.login }}</p>
     <p><strong>Посты:</strong> {{ user.posts }}</p>
-    <p><strong>Телефон:</strong> {{ user.phone }}</p>
-    <p><strong>Почта:</strong> {{ user.mail }}</p>
+    <p>
+      <strong>Телефон:</strong>
+      <user-info-input type="number" class="input" v-model:model-value="user.phone"></user-info-input>
+    </p>
+    <p>
+      <strong>Почта:</strong>
+      <user-info-input type="text" class="input" v-model="user.mail"></user-info-input>
+    </p>
+    <main-button class="button-save" @click="updateUserInfo">Сохранить</main-button>
   </modal-dialog>
 </template>
 
 <script>
 import ModalDialog from "@/components/UI/ModalDialog.vue";
 import {mapActions, mapGetters} from "vuex";
+import LoginButton from "@/components/UI/header/LoginButton.vue";
+import UserInfoInput from "@/components/UI/userInfo/UserInfoInput.vue";
 
 export default {
   name: "ModalInfoUser",
-  components: {ModalDialog},
-  computed: {
-    ...mapGetters('storeInfoUser', ['stateModalWindowInfoUser']),
+  components: {
+    UserInfoInput,
+    LoginButton,
+    ModalDialog,
   },
   props: {
     user: {
@@ -25,8 +35,15 @@ export default {
       mail: '',
     }
   },
+  computed: {
+    ...mapGetters('storeInfoUser', ['stateModalWindowInfoUser', 'requestUpdateUserInfo']),
+  },
   methods: {
     ...mapActions('storeInfoUser', ['toggleModalWindowInfoUser']),
+    updateUserInfo() {
+      this.requestUpdateUserInfo(this.user.mail, this.user.phone);
+      this.toggleModalWindowInfoUser();
+    }
   }
 }
 </script>
@@ -34,5 +51,13 @@ export default {
 <style scoped>
 p {
   margin: 30px 15px;
+}
+
+.input {
+  margin-left: 5px;
+}
+
+.button-save {
+  margin: 0 15px;
 }
 </style>
