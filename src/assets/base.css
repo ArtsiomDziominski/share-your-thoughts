@@ -19,6 +19,8 @@
   --color-background-choose-files: #eeeeee;
   --color-background-choose-files-border: #c5c5c5;
   --color-background-choose-files-border-hover: #fafafa;
+
+  --color-post-data-update: #c5c5c5;
 }
 
 body {

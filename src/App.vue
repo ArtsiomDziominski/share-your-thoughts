@@ -4,13 +4,11 @@
 </template>
 
 <script>
-import Post from "@/components/Post.vue";
 import HeaderSite from "@/components/header/HeaderSite.vue";
 
 export default {
   components: {
     HeaderSite,
-    Post,
   }
 }
 </script>
