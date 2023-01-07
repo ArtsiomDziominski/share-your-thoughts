@@ -46,13 +46,13 @@ export default {
   padding: 20px 30px;
   margin: 20px 0;
   border-radius: 10px;
-  box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.5);
+  box-shadow: var(--box-shadow-post);
   cursor: pointer;
 }
 
 .post:active {
   background-color: #ececec;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.8) inset;
+  box-shadow: var(--box-shadow-post-active);
 }
 
 .post .post__updated {
