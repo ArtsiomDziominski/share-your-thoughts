@@ -1,5 +1,5 @@
 import axios from "axios";
-import {HEADER_REQUEST, LOGIN_USER, URL} from "@/const/const.request-server";
+import {HEADER_REQUEST, LOGIN_USER, BURL} from "@/const/const.request-server";
 
 const state = () => ({
     isShowDialogLogin: false
@@ -7,7 +7,7 @@ const state = () => ({
 
 const getters = {
     requestLoginUser: () => (user) => {
-        return axios.post(URL + LOGIN_USER, {
+        return axios.post(BURL + LOGIN_USER, {
             login: user.login,
             password: user.password,
         }, {headers: HEADER_REQUEST})

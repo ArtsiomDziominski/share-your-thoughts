@@ -1,6 +1,6 @@
 import {createRouter, createWebHashHistory} from "vue-router";
-import HomeView from "@/views/HomeView.vue";
 import PostView from "@/views/PostView.vue";
+import allPosts from "@/views/AllPosts.vue";
 
 export default createRouter({
     history: createWebHashHistory(),
@@ -8,7 +8,7 @@ export default createRouter({
         {
             path: '/',
             name: 'home',
-            component: HomeView
+            component: allPosts
         },
         {
             path: '/post',
