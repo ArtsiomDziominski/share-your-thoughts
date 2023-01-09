@@ -1,9 +1,9 @@
 export const HEADER_REQUEST = {'Content-Type': 'application/x-www-form-urlencoded'};
 export const HEADER_CONTENT_TYPE = 'application/x-www-form-urlencoded';
-export const BURL = 'http://localhost:2000';
-export const CREATE_POST = '/post';
-export const CREATE_USER = '/auth/create-user';
-export const GET_USER = '/auth/get-user-info';
-export const LOGIN_USER = '/auth/login-user';
-export const UPDATE_USER_INFO = '/auth/update-user-contacts';
-export const GET_ALL_POSTS = '/auth/get-posts';
+export const BURL = 'http://185.104.115.27:2000/auth';
+export const CREATE_POST = '/create-post';
+export const CREATE_USER = '/create-user';
+export const GET_USER = '/get-user-info';
+export const LOGIN_USER = '/login-user';
+export const UPDATE_USER_INFO = '/update-user-contacts';
+export const GET_ALL_POSTS = '/get-posts';

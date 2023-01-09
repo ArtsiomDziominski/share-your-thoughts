@@ -3,6 +3,7 @@
   <modal-create-and-edit
       v-if="stateModalWindowCreateOrEditPost"
       @click="toggleModalWindowCreateOrEditPost"
+      v-model:post="post"
   >
     <main-button @click="createPost">Создать</main-button>
   </modal-create-and-edit>
@@ -11,6 +12,7 @@
 <script>
 import ModalCreateAndEdit from "@/components/ModalCreateAndEdit.vue";
 import {mapActions, mapGetters} from "vuex";
+import {CREATE_POST} from "@/const/const.request-server";
 
 export default {
   name: "CreatePost",
@@ -19,27 +21,24 @@ export default {
     return {
       dialogVisible: false,
       post: {
-        id: '',
         title: '',
-        body: '',
+        description: '',
         imageList: []
       },
     }
   },
   computed: {
-    ...mapGetters('storeCreateOrEditPost', [
-      'stateModalWindowCreateOrEditPost'
-    ]),
+    ...mapGetters('storeCreateOrEditPost', ['stateModalWindowCreateOrEditPost']),
+    ...mapGetters('requestServer', ['requestServerPost']),
   },
   methods: {
-    ...mapActions('storeCreateOrEditPost', [
-      'toggleModalWindowCreateOrEditPost'
-    ]),
+    ...mapActions('storeCreateOrEditPost', ['toggleModalWindowCreateOrEditPost']),
     createPost() {
-      this.post.id = Date.now();
+      const bodyPost = {title: this.post.title, description: this.post.description, imageList: this.post.imageList};
+      this.requestServerPost(CREATE_POST, bodyPost);
       this.post = {
         title: '',
-        body: '',
+        description: '',
         imgList: []
       }
       this.toggleModalWindowCreateOrEditPost();
