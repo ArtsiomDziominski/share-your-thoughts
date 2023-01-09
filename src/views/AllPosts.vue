@@ -1,9 +1,9 @@
 <template>
-    <div class="post" v-for="post in allPosts">
-      <h2 class="post__title">{{ post.title }}</h2>
-      <p class="post__description">{{ post.description }}</p>
-      <p class="post__updated">{{ post.updatedAt }}</p>
-    </div>
+  <div class="post" v-for="post in allPosts" :key="post._id" @click="showPost(post._id)">
+    <h2 class="post__title">{{ post.title }}</h2>
+    <p class="post__description">{{ post.description }}</p>
+    <p class="post__updated">{{ post.updatedAt }}</p>
+  </div>
 </template>
 
 <script>
@@ -15,6 +15,7 @@ export default {
   data() {
     return {
       allPosts: [{
+        _id: '',
         title: '',
         description: '',
         createdAt: '',
@@ -37,6 +38,11 @@ export default {
         })
         .catch((err) => console.log(err))
   },
+  methods: {
+    showPost(id) {
+      this.$router.push({path: '/detail/' + id})
+    }
+  }
 }
 </script>
 
