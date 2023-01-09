@@ -15,6 +15,9 @@ const getters = {
         const token = localStorage.getItem(TOKEN);
         return axios.post(BURL + urlBody, body, {headers: {'Content-Type': HEADER_CONTENT_TYPE, 'Authorization': 'Bearer ' + token}})
     },
+    requestServerGet: () => (urlBody) => {
+        return axios.get(BURL + urlBody, { headers: { 'Content-Type': HEADER_CONTENT_TYPE } })
+    }
 }
 
 export default {

@@ -1,4 +1,5 @@
 <template>
+  <create-post @getAllPost="getAllPost"></create-post>
   <div class="post" v-for="post in allPosts" :key="post._id" @click="showPost(post._id)">
     <h2 class="post__title">{{ post.title }}</h2>
     <p class="post__description">{{ post.description }}</p>
@@ -8,10 +9,12 @@
 
 <script>
 import {mapGetters} from "vuex";
-
+import CreatePost from "@/components/CreatePost.vue";
+import {GET_ALL_POSTS} from "@/const/const.request-server";
 
 export default {
   name: "AllPosts",
+  components: {CreatePost},
   data() {
     return {
       allPosts: [{
@@ -24,23 +27,33 @@ export default {
     }
   },
   computed: {
-    ...mapGetters('storeAllPosts', ['requestAllPosts'])
+    ...mapGetters('requestServer', ['requestServerGet']),
   },
   mounted() {
-    this.requestAllPosts
-        .then((result) => {
-          const posts = result.data
-          posts.forEach((post, index) => {
-            posts[index].description = post.description.length >= 100 ? post.description.slice(0, 100) + '...' : post.description;
-            posts[index].updatedAt = post.updatedAt.split('T')[0];
-          })
-          this.allPosts = posts
-        })
-        .catch((err) => console.log(err))
+    this.getAllPost();
   },
   methods: {
     showPost(id) {
-      this.$router.push({path: '/detail/' + id})
+      this.$router.push({path: '/detail/' + id});
+    },
+    async getAllPost() {
+      await this.requestServerGet(GET_ALL_POSTS)
+          .then((result) => {
+            const posts = result.data;
+            posts.forEach((post, index) => {
+              posts[index].description = post.description.length >= 100 ? post.description.slice(0, 100) + '...' : post.description;
+              posts[index].updatedAt = post.updatedAt.split('T')[0];
+            })
+            this.allPosts= [{
+              _id: '',
+              title: '',
+              description: '',
+              createdAt: '',
+              updatedAt: ''
+            }]
+            this.allPosts = posts;
+          })
+          .catch((err) => console.log(err))
     }
   }
 }

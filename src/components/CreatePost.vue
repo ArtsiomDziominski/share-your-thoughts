@@ -5,7 +5,7 @@
       @click="toggleModalWindowCreateOrEditPost"
       v-model:post="post"
   >
-    <main-button @click="createPost">Создать</main-button>
+    <main-button v-on:click="createPost">Создать</main-button>
   </modal-create-and-edit>
 </template>
 
@@ -34,8 +34,13 @@ export default {
   methods: {
     ...mapActions('storeCreateOrEditPost', ['toggleModalWindowCreateOrEditPost']),
     createPost() {
-      const bodyPost = {title: this.post.title, description: this.post.description, imageList: this.post.imageList};
-      this.requestServerPost(CREATE_POST, bodyPost);
+      const bodyPost = {
+        title: this.post.title,
+        description: this.post.description,
+        imageList: this.post.imageList
+      };
+      this.requestServerPost(CREATE_POST, bodyPost)
+          .then(() => this.$emit('getAllPost'));
       this.post = {
         title: '',
         description: '',
@@ -51,5 +56,7 @@ export default {
 </script>
 
 <style scoped>
-
+.create_post {
+  width: 100%;
+}
 </style>
