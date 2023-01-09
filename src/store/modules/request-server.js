@@ -1,5 +1,6 @@
 import axios from "axios";
-import {HEADER_REQUEST, CREATE_USER, BURL} from "@/const/const.request-server";
+import {HEADER_REQUEST, CREATE_USER, BURL, HEADER_CONTENT_TYPE} from "@/const/const.request-server";
+import {TOKEN} from "@/const/const";
 
 const state = () => ({})
 
@@ -9,6 +10,10 @@ const getters = {
             login: params.login,
             password: params.password
         }, {headers: HEADER_REQUEST})
+    },
+    requestServerPost: () => (urlBody, body) => {
+        const token = localStorage.getItem(TOKEN);
+        return axios.post(BURL + urlBody, body, {headers: {'Content-Type': HEADER_CONTENT_TYPE, 'Authorization': 'Bearer ' + token}})
     },
 }
 

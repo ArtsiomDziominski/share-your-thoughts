@@ -6,14 +6,14 @@
         maxlength="40"
         v-model="post.title"
     ></main-input>
-    <choose-files @create="addImages" :images="post.imageList"></choose-files>
+<!--    <choose-files @create="addImages" :images="post.imageList"></choose-files>-->
     <p>Комментарий</p>
     <textarea
         name="comment"
         cols="40"
         rows="7"
         maxlength="255"
-        v-model="post.body"
+        v-model="post.description"
     ></textarea>
     <slot></slot>
   </modal-dialog>
@@ -28,7 +28,11 @@ export default {
   props: {
     post: {
       type: Array,
-      default: []
+      default: {
+        title: '',
+        description: '',
+        imageList: []
+      }
     }
   },
   methods: {
