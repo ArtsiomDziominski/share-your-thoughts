@@ -29,7 +29,7 @@ export default {
   },
   computed: {
     ...mapGetters('requestServer', ['requestServerGet']),
-    ...mapGetters('storeUser', ['stateActiveUser', 'stateUserInfo']),
+    ...mapGetters('storeUser', ['stateActiveUser']),
   },
   mounted() {
     this.getAllPost();
@@ -37,7 +37,7 @@ export default {
     if (token) this.requestServerGet(GET_USER)
         .then((user) => {
           this.setUserInfo(user.data);
-          this.toggleActiveUser();
+          this.toggleActiveUser(true);
         })
         .catch((err) => console.log(err.response.data))
   },

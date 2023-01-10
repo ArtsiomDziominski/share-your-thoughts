@@ -31,6 +31,7 @@ export default {
   methods: {
     ...mapActions('storeRegistration', ['toggleModalWindowRegistration']),
     ...mapActions('loginUser', ['toggleModalWindowLogin']),
+    ...mapActions('storeUser', ['toggleActiveUser']),
     clickRegistration() {
       this.toggleModalWindowRegistration();
       this.toggleModalWindowLogin();
@@ -41,6 +42,7 @@ export default {
           .then(resultServer => {
             const token = resultServer.data.jwt;
             localStorage.setItem(TOKEN, token);
+            this.toggleActiveUser(true);
             this.toggleModalWindowLogin();
           })
           .catch((err) => this.errorMessage = err.response.data)

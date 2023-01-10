@@ -47,8 +47,8 @@ const actions = {
     async toggleModalWindowInfoUser({commit}) {
         commit('changeModalWindowInfoUser')
     },
-    async toggleActiveUser({commit}) {
-        commit('changeActiveUser')
+    async toggleActiveUser({commit}, isActive) {
+        commit('changeActiveUser', isActive)
     },
     async setUserInfo({commit}, user) {
         commit('changeUserInfo', user)
@@ -59,8 +59,8 @@ const mutations = {
     changeModalWindowInfoUser: (state) => {
         state.isShowDialogInfoUser = !state.isShowDialogInfoUser;
     },
-    changeActiveUser: (state) => {
-        state.isActiveUser = !state.isActiveUser;
+    changeActiveUser: (state, isActive) => {
+        state.isActiveUser = isActive;
     },
     changeUserInfo: (state, user) => {
         state.user = user;
