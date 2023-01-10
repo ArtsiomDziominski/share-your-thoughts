@@ -36,10 +36,10 @@ export default {
     }
   },
   computed: {
-    ...mapGetters('storeInfoUser', ['stateModalWindowInfoUser', 'requestUpdateUserInfo']),
+    ...mapGetters('storeUser', ['stateModalWindowInfoUser', 'requestUpdateUserInfo']),
   },
   methods: {
-    ...mapActions('storeInfoUser', ['toggleModalWindowInfoUser']),
+    ...mapActions('storeUser', ['toggleModalWindowInfoUser']),
     updateUserInfo() {
       this.requestUpdateUserInfo(this.user.mail, this.user.phone);
       this.toggleModalWindowInfoUser();

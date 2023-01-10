@@ -1,5 +1,5 @@
 <template>
-  <create-post @getAllPost="getAllPost"></create-post>
+  <create-post v-if="stateActiveUser" @getAllPost="getAllPost"></create-post>
   <div class="post" v-for="post in allPosts" :key="post._id" @click="showPost(post._id)">
     <h2 class="post__title">{{ post.title }}</h2>
     <p class="post__description">{{ post.description }}</p>
@@ -8,9 +8,10 @@
 </template>
 
 <script>
-import {mapGetters} from "vuex";
+import {mapActions, mapGetters} from "vuex";
 import CreatePost from "@/components/CreatePost.vue";
-import {GET_ALL_POSTS} from "@/const/const.request-server";
+import {GET_ALL_POSTS, GET_USER} from "@/const/const.request-server";
+import {TOKEN} from "@/const/const";
 
 export default {
   name: "AllPosts",
@@ -28,11 +29,20 @@ export default {
   },
   computed: {
     ...mapGetters('requestServer', ['requestServerGet']),
+    ...mapGetters('storeUser', ['stateActiveUser']),
   },
   mounted() {
     this.getAllPost();
+    const token = localStorage.getItem(TOKEN)
+    if (token) this.requestServerGet(GET_USER)
+        .then((user) => {
+          this.setUserInfo(user.data);
+          this.toggleActiveUser(true);
+        })
+        .catch((err) => console.log(err.response.data))
   },
   methods: {
+    ...mapActions('storeUser', ['toggleActiveUser', 'setUserInfo']),
     showPost(id) {
       this.$router.push({path: '/detail/' + id});
     },
@@ -44,7 +54,7 @@ export default {
               posts[index].description = post.description.length >= 100 ? post.description.slice(0, 100) + '...' : post.description;
               posts[index].updatedAt = post.updatedAt.split('T')[0];
             })
-            this.allPosts= [{
+            this.allPosts = [{
               _id: '',
               title: '',
               description: '',

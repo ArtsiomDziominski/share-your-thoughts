@@ -1,6 +1,7 @@
 <template>
   <button @click="checkUserLogin">
-    <img src="src/assets/account-avatar.svg" alt="avatar">
+    <img v-if="stateActiveUser" src="src/assets/account-avatar.svg" alt="avatar">
+    <img v-if="!stateActiveUser" src="src/assets/input.svg" alt="input">
   </button>
   <modal-login></modal-login>
   <modal-info-user :user="user"></modal-info-user>
@@ -21,15 +22,15 @@ export default {
         posts: [],
         phone: '',
         mail: '',
-      }
+      },
     }
   },
   computed: {
-    ...mapGetters('storeInfoUser', ['getUserInfo']),
+    ...mapGetters('storeUser', ['getUserInfo', 'stateActiveUser']),
   },
   methods: {
     ...mapActions('loginUser', ['toggleModalWindowLogin']),
-    ...mapActions('storeInfoUser', ['toggleModalWindowInfoUser']),
+    ...mapActions('storeUser', ['toggleModalWindowInfoUser']),
     checkUserLogin() {
       this.getUserInfo()
           .then((userInfo) => {
@@ -37,7 +38,6 @@ export default {
             this.toggleModalWindowInfoUser();
           })
           .catch(() => this.toggleModalWindowLogin())
-
     }
   }
 }
