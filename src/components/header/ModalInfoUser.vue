@@ -11,6 +11,7 @@
       <user-info-input type="text" class="input" v-model="user.mail"></user-info-input>
     </p>
     <main-button class="button-save" @click="updateUserInfo">Сохранить</main-button>
+    <main-button class="button-save" @click="exitProfile">Выход</main-button>
   </modal-dialog>
 </template>
 
@@ -19,6 +20,7 @@ import ModalDialog from "@/components/UI/ModalDialog.vue";
 import {mapActions, mapGetters} from "vuex";
 import LoginButton from "@/components/UI/header/LoginButton.vue";
 import UserInfoInput from "@/components/UI/userInfo/UserInfoInput.vue";
+import {TOKEN} from "@/const/const";
 
 export default {
   name: "ModalInfoUser",
@@ -36,13 +38,17 @@ export default {
     }
   },
   computed: {
-    ...mapGetters('storeUser', ['stateModalWindowInfoUser', 'requestUpdateUserInfo']),
+    ...mapGetters('storeUser', ['stateModalWindowInfoUser', 'requestUpdateUserInfo', 'stateActiveUser']),
   },
   methods: {
     ...mapActions('storeUser', ['toggleModalWindowInfoUser']),
     updateUserInfo() {
       this.requestUpdateUserInfo(this.user.mail, this.user.phone);
       this.toggleModalWindowInfoUser();
+    },
+    exitProfile() {
+      localStorage.removeItem(TOKEN);
+      this.stateActiveUser(false)
     }
   }
 }
