@@ -13,6 +13,7 @@
 <script>
 import {mapActions, mapGetters} from "vuex";
 import {PASSWORD_NOT_MATCH} from "@/const/message";
+import {CREATE_USER} from "@/const/const.request-server";
 
 export default {
   name: "ModalRegistration",
@@ -29,14 +30,18 @@ export default {
   },
   computed: {
     ...mapGetters('storeRegistration', ['stateModalWindowRegistration']),
-    ...mapGetters('requestServer', ['requestCreateUser']),
+    ...mapGetters('requestServer', ['requestServerPost']),
   },
   methods: {
     ...mapActions('storeRegistration', ['toggleModalWindowRegistration']),
     createNewUser() {
+      const bodyPost = {
+        login: this.UserCandidate.login,
+        password: this.UserCandidate.password
+      }
       this.errorMessage = '';
       this.UserCandidate.password === this.passwordControl ?
-          this.requestCreateUser(this.UserCandidate)
+          this.requestServerPost(CREATE_USER, bodyPost)
               .then((result) => {
                 this.messageServer = result.data;
                 this.toggleModalWindowRegistration();
