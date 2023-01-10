@@ -42,7 +42,6 @@ export default {
         .then((user) => {
           this.setUserInfo(user.data);
           this.toggleActiveUser(true);
-          console.log(user)
         })
         .catch((err) => console.log(err.response.data))
   },
@@ -66,7 +65,7 @@ export default {
               createdAt: '',
               updatedAt: ''
             }]
-            this.allPosts = posts;
+            this.allPosts = posts.reverse();
           })
           .catch((err) => console.log(err))
           .finally(() => this.isLoader = false)
@@ -91,10 +90,6 @@ export default {
   border-radius: 10px;
   box-shadow: var(--box-shadow-post);
   cursor: pointer;
-}
-
-.post .loader {
-  margin: auto;
 }
 
 .post:active {
