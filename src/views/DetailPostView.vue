@@ -1,5 +1,8 @@
 <template>
   <div class="post">
+    <div class="wrapper-loader" v-if="isLoader">
+      <span class="loader"></span>
+    </div>
     <modal-create-and-edit
         v-if="stateModalWindowCreateOrEditPost"
         @click="toggleModalWindowCreateOrEditPost"
@@ -34,7 +37,8 @@ export default {
         createdAt: '',
         updatedAt: '',
         _id: ''
-      }
+      },
+      isLoader: true,
     }
   },
   computed: {
@@ -48,6 +52,7 @@ export default {
           this.post = post.data
           this.post.createdAt = this.post.createdAt.split('T')[0];
           this.post.updatedAt = this.post.updatedAt.split('T')[0];
+          this.isLoader = false;
         })
   },
   methods: {
@@ -73,11 +78,21 @@ export default {
 </script>
 
 <style scoped>
+.wrapper-loader {
+  width: 100%;
+  height: 80%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
 .post {
   width: 90%;
   padding: 20px 20px 40px 20px;
   position: relative;
   margin: auto;
+  box-shadow: var(--box-shadow-post);
+  border-radius: 10px;
 }
 
 .post__descriptions {
