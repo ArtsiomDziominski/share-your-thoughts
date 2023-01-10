@@ -38,17 +38,18 @@ export default {
     }
   },
   computed: {
-    ...mapGetters('storeUser', ['stateModalWindowInfoUser', 'requestUpdateUserInfo', 'stateActiveUser']),
+    ...mapGetters('storeUser', ['stateModalWindowInfoUser', 'requestUpdateUserInfo']),
   },
   methods: {
-    ...mapActions('storeUser', ['toggleModalWindowInfoUser']),
+    ...mapActions('storeUser', ['toggleModalWindowInfoUser', 'toggleActiveUser']),
     updateUserInfo() {
       this.requestUpdateUserInfo(this.user.mail, this.user.phone);
       this.toggleModalWindowInfoUser();
     },
     exitProfile() {
       localStorage.removeItem(TOKEN);
-      this.stateActiveUser(false)
+      this.toggleActiveUser(false);
+      this.toggleModalWindowInfoUser();
     }
   }
 }

@@ -42,7 +42,7 @@ export default {
         .then((user) => {
           this.setUserInfo(user.data);
           this.toggleActiveUser(true);
-          this.isLoader = false;
+          console.log(user)
         })
         .catch((err) => console.log(err.response.data))
   },
@@ -69,6 +69,7 @@ export default {
             this.allPosts = posts;
           })
           .catch((err) => console.log(err))
+          .finally(() => this.isLoader = false)
     }
   }
 }
