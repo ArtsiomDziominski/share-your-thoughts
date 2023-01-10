@@ -25,11 +25,11 @@ export default {
     }
   },
   computed: {
-    ...mapGetters('storeInfoUser', ['getUserInfo']),
+    ...mapGetters('storeUser', ['getUserInfo']),
   },
   methods: {
     ...mapActions('loginUser', ['toggleModalWindowLogin']),
-    ...mapActions('storeInfoUser', ['toggleModalWindowInfoUser']),
+    ...mapActions('storeUser', ['toggleModalWindowInfoUser']),
     checkUserLogin() {
       this.getUserInfo()
           .then((userInfo) => {
