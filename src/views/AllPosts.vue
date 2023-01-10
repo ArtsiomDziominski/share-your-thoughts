@@ -1,5 +1,8 @@
 <template>
   <create-post v-if="stateActiveUser" @getAllPost="getAllPost"></create-post>
+  <div class="wrapper-loader" v-if="isLoader">
+    <span class="loader"></span>
+  </div>
   <div class="post" v-for="post in allPosts" :key="post._id" @click="showPost(post._id)">
     <h2 class="post__title">{{ post.title }}</h2>
     <p class="post__description">{{ post.description }}</p>
@@ -24,7 +27,8 @@ export default {
         description: '',
         createdAt: '',
         updatedAt: ''
-      }]
+      }],
+      isLoader: true,
     }
   },
   computed: {
@@ -38,6 +42,7 @@ export default {
         .then((user) => {
           this.setUserInfo(user.data);
           this.toggleActiveUser(true);
+          this.isLoader = false;
         })
         .catch((err) => console.log(err.response.data))
   },
@@ -70,6 +75,14 @@ export default {
 </script>
 
 <style scoped>
+.wrapper-loader {
+  width: 100%;
+  height: 80%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
 .post {
   position: relative;
   padding: 20px 30px;
@@ -77,6 +90,10 @@ export default {
   border-radius: 10px;
   box-shadow: var(--box-shadow-post);
   cursor: pointer;
+}
+
+.post .loader {
+  margin: auto;
 }
 
 .post:active {

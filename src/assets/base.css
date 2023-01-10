@@ -23,6 +23,8 @@
   --color-post-data-update: #c5c5c5;
   --box-shadow-post: 5px 5px 10px rgba(0, 0, 0, 0.5);
   --box-shadow-post-active: 0 0 10px rgba(0, 0, 0, 0.8) inset;
+
+  --loader-border-color: transparent transparent #FF3D00 #FF3D00;
 }
 
 body {
