@@ -7,7 +7,6 @@ export const UPDATE_POST = '/update-post';
 export const DELETE_POST = '/delete-post';
 export const CREATE_USER = '/create-user';
 export const GET_USER = '/get-user';
-// export const GET_USER = '/get-user-info';
 export const LOGIN_USER = '/login-user';
 export const UPDATE_USER_INFO = '/update-user-contacts';
 export const GET_ALL_POSTS = '/get-posts';

@@ -14,14 +14,15 @@
     <p class="post__descriptions">{{ post.description }}</p>
     <p class="post__created">created {{ post.createdAt }}</p>
     <p class="post__updated">updated {{ post.updatedAt }}</p>
-    <main-button class="button" @click="toggleModalWindowCreateOrEditPost">Изменить</main-button>
-    <main-button @click="deletePost">Удалить</main-button>
+    <p class="post__author">{{ post.author }}</p>
+    <main-button class="button" v-if="isActiveButton" @click="toggleModalWindowCreateOrEditPost">Изменить</main-button>
+    <main-button v-if="isActiveButton" @click="deletePost">Удалить</main-button>
   </div>
 </template>
 
 <script>
 import {mapActions, mapGetters} from "vuex";
-import {DELETE_POST, GET_POST, UPDATE_POST} from "@/const/const.request-server";
+import {DELETE_POST, GET_POST, GET_USER, UPDATE_POST} from "@/const/const.request-server";
 import Post from "@/components/Post.vue";
 import MainButton from "@/components/UI/MainButton.vue";
 import ModalCreateAndEdit from "@/components/ModalCreateAndEdit.vue";
@@ -36,23 +37,29 @@ export default {
         description: '',
         createdAt: '',
         updatedAt: '',
-        _id: ''
+        _id: '',
+        author: ''
       },
       isLoader: true,
+      isActiveButton: false
     }
   },
   computed: {
     ...mapGetters('storeCreateOrEditPost', ['stateModalWindowCreateOrEditPost']),
-    ...mapGetters('requestServer', ['requestServerPost'])
+    ...mapGetters('requestServer', ['requestServerPost', 'requestServerGet'])
   },
-  mounted() {
+  async mounted() {
     const body = {id: this.$route.params.id}
-    this.requestServerPost(GET_POST, body)
+    await this.requestServerPost(GET_POST, body)
         .then((post) => {
           this.post = post.data
           this.post.createdAt = this.post.createdAt.split('T')[0];
           this.post.updatedAt = this.post.updatedAt.split('T')[0];
           this.isLoader = false;
+        })
+    await this.requestServerGet(GET_USER)
+        .then((user) => {
+          this.isActiveButton = this.post.author === user.data.login;
         })
   },
   methods: {
@@ -104,6 +111,7 @@ export default {
   right: 20px;
   bottom: 15px;
   font-size: 10px;
+  color: var(--color-post-data-update);
 }
 
 .post__updated {
@@ -111,6 +119,15 @@ export default {
   right: 20px;
   bottom: 0;
   font-size: 10px;
+  color: var(--color-post-data-update);
+}
+
+.post__author {
+  position: absolute;
+  right: 20px;
+  bottom: 30px;
+  font-size: 10px;
+  color: var(--color-post-data-update);
 }
 
 .button {

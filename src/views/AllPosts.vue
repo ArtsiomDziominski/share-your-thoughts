@@ -7,6 +7,7 @@
     <h2 class="post__title">{{ post.title }}</h2>
     <p class="post__description">{{ post.description }}</p>
     <p class="post__updated">{{ post.updatedAt }}</p>
+    <p class="post__author">{{ post.author }}</p>
   </div>
 </template>
 
@@ -21,13 +22,7 @@ export default {
   components: {CreatePost},
   data() {
     return {
-      allPosts: [{
-        _id: '',
-        title: '',
-        description: '',
-        createdAt: '',
-        updatedAt: ''
-      }],
+      allPosts: [],
       isLoader: true,
     }
   },
@@ -102,6 +97,14 @@ export default {
   right: 10px;
   bottom: 0;
   font-size: 10px;
+  color: var(--color-post-data-update);
+}
+
+.post .post__author {
+  position: absolute;
+  right: 10px;
+  bottom: 10px;
+  font-size: 12px;
   color: var(--color-post-data-update);
 }
 </style>
