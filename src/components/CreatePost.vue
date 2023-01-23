@@ -37,7 +37,6 @@ export default {
       const bodyPost = {
         title: this.post.title,
         description: this.post.description,
-        imageList: this.post.imageList
       };
       this.requestServerPost(CREATE_POST, bodyPost)
           .then(() => this.$emit('getAllPost'));

@@ -1,29 +1,25 @@
 <template>
-  <show-image
-      v-model:image-full-screen="imageFullScreen"
-      :image-list="imageListFullScreen"
-  >
-  </show-image>
+<!--  <show-image-->
+<!--      v-model:image-full-screen="imageFullScreen"-->
+<!--      :image-list="imageListFullScreen"-->
+<!--  >-->
+<!--  </show-image>-->
   <h2 class="post__title">{{ post.title }}</h2>
-  <div class="post__img">
-    <template v-for="img in isShowAllImages ? post.imageList:post?.imageList?.slice(0,3) || []">
-      <img class="img" :src="img" alt="image post" @click="displayImageFullScreen(img, post.imageList)">
-    </template>
-    <main-button
-        class="post__more_img"
-        @click="this.isShowAllImages = !this.isShowAllImages;"
-        v-if="post?.imageList?.length > maxShowImgInPost"
-    >{{ isShowAllImages ? '<<' : '>>' }}
-    </main-button>
-  </div>
+<!--  <div class="post__img">-->
+<!--    <template v-for="img in isShowAllImages ? post.imageList:post?.imageList?.slice(0,3) || []">-->
+<!--      <img class="img" :src="img" alt="image post" @click="displayImageFullScreen(img, post.imageList)">-->
+<!--    </template>-->
+<!--    <main-button-->
+<!--        class="post__more_img"-->
+<!--        @click="this.isShowAllImages = !this.isShowAllImages;"-->
+<!--        v-if="post?.imageList?.length > maxShowImgInPost"-->
+<!--    >{{ isShowAllImages ? '<<' : '>>' }}-->
+<!--    </main-button>-->
+<!--  </div>-->
   <p class="post__body">{{ post.body }}</p>
   <div class="post__button">
     <edit-post :post="post"></edit-post>
-    <main-button
-        @click="deletePost(post.id)"
-    >
-      Удалить
-    </main-button>
+    <main-button @click="deletePost(post.id)">Удалить</main-button>
   </div>
 </template>
 
