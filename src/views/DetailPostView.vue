@@ -15,8 +15,15 @@
     <p class="post__created">created {{ post.createdAt }}</p>
     <p class="post__updated">updated {{ post.updatedAt }}</p>
     <p class="post__author">{{ post.author }}</p>
-    <main-button class="button" v-if="isActiveButton" @click="toggleModalWindowCreateOrEditPost">Изменить</main-button>
-    <main-button v-if="isActiveButton" @click="deletePost">Удалить</main-button>
+    <div class="post__footer">
+      <div class="post__button">
+        <main-button class="button" v-if="isActiveButton" @click="toggleModalWindowCreateOrEditPost">
+          Изменить
+        </main-button>
+        <main-button v-if="isActiveButton" @click="deletePost">Удалить</main-button>
+      </div>
+      <the-likes class="likes" :post="post"></the-likes>
+    </div>
   </div>
 </template>
 
@@ -26,10 +33,12 @@ import {DELETE_POST, GET_POST, GET_USER, UPDATE_POST} from "@/const/const.reques
 import Post from "@/components/Post.vue";
 import MainButton from "@/components/UI/MainButton.vue";
 import ModalCreateAndEdit from "@/components/ModalCreateAndEdit.vue";
+import TheLikes from "@/components/TheLikes.vue";
+import {formatDate} from "@/helpers/format-date";
 
 export default {
   name: "DetailPostView",
-  components: {ModalCreateAndEdit, MainButton, Post},
+  components: {TheLikes, ModalCreateAndEdit, MainButton, Post},
   data() {
     return {
       post: {
@@ -46,15 +55,15 @@ export default {
   },
   computed: {
     ...mapGetters('storeCreateOrEditPost', ['stateModalWindowCreateOrEditPost']),
-    ...mapGetters('requestServer', ['requestServerPost', 'requestServerGet'])
+    ...mapGetters('requestServer', ['requestServerPost', 'requestServerGet']),
   },
   async mounted() {
     const body = {id: this.$route.params.id}
     await this.requestServerPost(GET_POST, body)
         .then((post) => {
           this.post = post.data
-          this.post.createdAt = this.post.createdAt.split('T')[0];
-          this.post.updatedAt = this.post.updatedAt.split('T')[0];
+          this.post.createdAt = formatDate(this.post.createdAt);
+          this.post.updatedAt = formatDate(this.post.updatedAt);
           this.isLoader = false;
         })
     await this.requestServerGet(GET_USER)
@@ -78,7 +87,7 @@ export default {
     deletePost() {
       const bodyPost = {id: this.post._id};
       this.requestServerPost(DELETE_POST, bodyPost)
-          .then(()=> window.history.back())
+          .then(() => window.history.back())
     }
   }
 }
@@ -132,5 +141,12 @@ export default {
 
 .button {
   margin-right: 10px;
+}
+
+
+.post__footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
 }
 </style>

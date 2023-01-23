@@ -8,6 +8,7 @@
     <p class="post__description">{{ post.description }}</p>
     <p class="post__updated">{{ post.updatedAt }}</p>
     <p class="post__author">{{ post.author }}</p>
+    <the-likes @click.stop :post="post"></the-likes>
   </div>
 </template>
 
@@ -16,10 +17,11 @@ import {mapActions, mapGetters} from "vuex";
 import CreatePost from "@/components/CreatePost.vue";
 import {GET_ALL_POSTS, GET_USER} from "@/const/const.request-server";
 import {TOKEN} from "@/const/const";
+import TheLikes from "@/components/TheLikes.vue";
 
 export default {
   name: "AllPosts",
-  components: {CreatePost},
+  components: {TheLikes, CreatePost},
   data() {
     return {
       allPosts: [],
