@@ -12,9 +12,7 @@
     </modal-create-and-edit>
     <h2>{{ post.title }}</h2>
     <p class="post__descriptions">{{ post.description }}</p>
-    <p class="post__created">created {{ post.createdAt }}</p>
-    <p class="post__updated">updated {{ post.updatedAt }}</p>
-    <p class="post__author">{{ post.author }}</p>
+    <author-date-post class="post__author-date" :post="post"></author-date-post>
     <div class="post__footer">
       <div class="post__button">
         <main-button class="button" v-if="isActiveButton" @click="toggleModalWindowCreateOrEditPost">
@@ -35,10 +33,11 @@ import MainButton from "@/components/UI/MainButton.vue";
 import ModalCreateAndEdit from "@/components/ModalCreateAndEdit.vue";
 import TheLikes from "@/components/TheLikes.vue";
 import {formatDate} from "@/helpers/format-date";
+import AuthorDatePost from "@/components/AuthorDatePost.vue";
 
 export default {
   name: "DetailPostView",
-  components: {TheLikes, ModalCreateAndEdit, MainButton, Post},
+  components: {AuthorDatePost, TheLikes, ModalCreateAndEdit, MainButton, Post},
   data() {
     return {
       post: {
@@ -79,8 +78,8 @@ export default {
       await this.requestServerPost(GET_POST, {id: bodyPost.id})
           .then((post) => {
             this.post = post.data
-            this.post.createdAt = this.post.createdAt.split('T')[0];
-            this.post.updatedAt = this.post.updatedAt.split('T')[0];
+            this.post.createdAt = formatDate(this.post.createdAt);
+            this.post.updatedAt = formatDate(this.post.updatedAt);
           })
       this.toggleModalWindowCreateOrEditPost();
     },
@@ -115,38 +114,19 @@ export default {
   word-wrap: break-word;
 }
 
-.post__created {
-  position: absolute;
-  right: 20px;
-  bottom: 15px;
-  font-size: 10px;
-  color: var(--color-post-data-update);
-}
-
-.post__updated {
-  position: absolute;
-  right: 20px;
-  bottom: 0;
-  font-size: 10px;
-  color: var(--color-post-data-update);
-}
-
-.post__author {
-  position: absolute;
-  right: 20px;
-  bottom: 30px;
-  font-size: 10px;
-  color: var(--color-post-data-update);
-}
-
 .button {
   margin-right: 10px;
 }
-
 
 .post__footer {
   display: flex;
   justify-content: space-between;
   align-items: flex-end;
+}
+
+.post__author-date {
+  position: absolute;
+  top: 25px;
+  right: 10px;
 }
 </style>

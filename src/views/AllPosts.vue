@@ -6,8 +6,7 @@
   <div class="post" v-for="post in allPosts" :key="post._id" @click="showPost(post._id)">
     <h2 class="post__title">{{ post.title }}</h2>
     <p class="post__description">{{ post.description }}</p>
-    <p class="post__updated">{{ post.updatedAt }}</p>
-    <p class="post__author">{{ post.author }}</p>
+    <author-date-post class="post__author-data" :post="post"></author-date-post>
     <the-likes @click.stop :post="post"></the-likes>
   </div>
 </template>
@@ -18,10 +17,12 @@ import CreatePost from "@/components/CreatePost.vue";
 import {GET_ALL_POSTS, GET_USER} from "@/const/const.request-server";
 import {TOKEN} from "@/const/const";
 import TheLikes from "@/components/TheLikes.vue";
+import AuthorDatePost from "@/components/AuthorDatePost.vue";
+import {formatDate} from "@/helpers/format-date";
 
 export default {
   name: "AllPosts",
-  components: {TheLikes, CreatePost},
+  components: {AuthorDatePost, TheLikes, CreatePost},
   data() {
     return {
       allPosts: [],
@@ -53,7 +54,8 @@ export default {
             const posts = result.data;
             posts.forEach((post, index) => {
               posts[index].description = post.description.length >= 100 ? post.description.slice(0, 100) + '...' : post.description;
-              posts[index].updatedAt = post.updatedAt.split('T')[0];
+              posts[index].createdAt = formatDate(posts[index].createdAt);
+              posts[index].updatedAt = formatDate(posts[index].updatedAt);
             })
             this.allPosts = [{
               _id: '',
@@ -94,19 +96,9 @@ export default {
   box-shadow: var(--box-shadow-post-active);
 }
 
-.post .post__updated {
+.post__author-data {
   position: absolute;
+  bottom: 25px;
   right: 10px;
-  bottom: 0;
-  font-size: 10px;
-  color: var(--color-post-data-update);
-}
-
-.post .post__author {
-  position: absolute;
-  right: 10px;
-  bottom: 10px;
-  font-size: 12px;
-  color: var(--color-post-data-update);
 }
 </style>
