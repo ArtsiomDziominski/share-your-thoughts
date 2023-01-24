@@ -1,4 +1,5 @@
 <template>
+  <router-link class="button-back" to="/">{{ '<<' }} Назад</router-link>
   <div class="post">
     <div class="wrapper-loader" v-if="isLoader">
       <span class="loader"></span>
@@ -93,6 +94,10 @@ export default {
 </script>
 
 <style scoped>
+.button-back {
+  margin: 20px 50px;
+}
+
 .wrapper-loader {
   width: 100%;
   height: 80%;
