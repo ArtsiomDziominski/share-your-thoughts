@@ -1,8 +1,6 @@
 <template>
   <create-post v-if="stateActiveUser" @getAllPost="getAllPost"></create-post>
-  <div class="wrapper-loader" v-if="isLoader">
-    <span class="loader"></span>
-  </div>
+  <the-loader :is-loader="isLoader"></the-loader>
   <div class="post" v-for="post in allPosts" :key="post._id" @click="showPost(post._id)">
     <h2 class="post__title">{{ post.title }}</h2>
     <p class="post__description">{{ post.description }}</p>
@@ -19,10 +17,11 @@ import {TOKEN} from "@/const/const";
 import TheLikes from "@/components/TheLikes.vue";
 import AuthorDatePost from "@/components/AuthorDatePost.vue";
 import {formatDate} from "@/helpers/format-date";
+import TheLoader from "@/components/TheLoader.vue";
 
 export default {
   name: "AllPosts",
-  components: {AuthorDatePost, TheLikes, CreatePost},
+  components: {TheLoader, AuthorDatePost, TheLikes, CreatePost},
   data() {
     return {
       allPosts: [],
@@ -74,14 +73,6 @@ export default {
 </script>
 
 <style scoped>
-.wrapper-loader {
-  width: 100%;
-  height: 80%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-
 .post {
   position: relative;
   padding: 20px 30px;

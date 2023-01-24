@@ -1,9 +1,7 @@
 <template>
   <router-link class="button-back" to="/">{{ '<<' }} Назад</router-link>
   <div class="post">
-    <div class="wrapper-loader" v-if="isLoader">
-      <span class="loader"></span>
-    </div>
+    <the-loader :is-loader="isLoader"></the-loader>
     <modal-create-and-edit
         v-if="stateModalWindowCreateOrEditPost"
         @click="toggleModalWindowCreateOrEditPost"
@@ -35,10 +33,11 @@ import ModalCreateAndEdit from "@/components/ModalCreateAndEdit.vue";
 import TheLikes from "@/components/TheLikes.vue";
 import {formatDate} from "@/helpers/format-date";
 import AuthorDatePost from "@/components/AuthorDatePost.vue";
+import TheLoader from "@/components/TheLoader.vue";
 
 export default {
   name: "DetailPostView",
-  components: {AuthorDatePost, TheLikes, ModalCreateAndEdit, MainButton, Post},
+  components: {TheLoader, AuthorDatePost, TheLikes, ModalCreateAndEdit, MainButton, Post},
   data() {
     return {
       post: {
@@ -64,6 +63,7 @@ export default {
           this.post = post.data
           this.post.createdAt = formatDate(this.post.createdAt);
           this.post.updatedAt = formatDate(this.post.updatedAt);
+          debugger
           this.isLoader = false;
         })
     await this.requestServerGet(GET_USER)
@@ -96,14 +96,6 @@ export default {
 <style scoped>
 .button-back {
   margin: 20px 50px;
-}
-
-.wrapper-loader {
-  width: 100%;
-  height: 80%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
 }
 
 .post {
