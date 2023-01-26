@@ -37,9 +37,9 @@ export default {
   },
   setup(props) {
     let isLike = false;
+    const post = JSON.parse(JSON.stringify(props.post));
 
     async function addLike() {
-      const post = props.post;
       const bodyPost = {id: post._id};
       await requestServerPost(ADD_LIKE_POST, bodyPost)
           .then(resultPost => post.usersLiked = resultPost.data.usersLiked)
