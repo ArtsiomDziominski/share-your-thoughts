@@ -44,6 +44,7 @@ export default {
   },
   methods: {
     ...mapActions('storeUser', ['toggleActiveUser', 'setUserInfo']),
+    ...mapActions('storeAllPosts', ['updateAllPosts']),
     showPost(id) {
       this.$router.push({path: '/detail/' + id});
     },
@@ -64,6 +65,7 @@ export default {
               updatedAt: ''
             }]
             this.allPosts = posts.reverse();
+            this.updateAllPosts(this.allPosts)
           })
           .catch((err) => console.log(err))
           .finally(() => this.isLoader = false)

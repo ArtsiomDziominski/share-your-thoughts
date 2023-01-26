@@ -63,7 +63,6 @@ export default {
           this.post = post.data
           this.post.createdAt = formatDate(this.post.createdAt);
           this.post.updatedAt = formatDate(this.post.updatedAt);
-          debugger
           this.isLoader = false;
         })
     await this.requestServerGet(GET_USER)
