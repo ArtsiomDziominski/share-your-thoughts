@@ -3,7 +3,7 @@ const state = () => ({
 })
 
 const getters = {
-    stateAllPosts(state) {
+    getAllPosts(state) {
         return state.allPosts;
     },
 }

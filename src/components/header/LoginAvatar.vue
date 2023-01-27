@@ -27,6 +27,7 @@ export default {
   },
   computed: {
     ...mapGetters('storeUser', ['getUserInfo', 'stateActiveUser']),
+    ...mapGetters('storeAllPosts', ['getAllPosts']),
   },
   methods: {
     ...mapActions('loginUser', ['toggleModalWindowLogin']),
@@ -35,6 +36,8 @@ export default {
       this.getUserInfo()
           .then((userInfo) => {
             this.user = userInfo.data;
+            this.user.posts = [];
+            this.getAllPosts.forEach((post)=> {if (post.author === this.user.login) {this.user.posts.push(post)}});
             this.toggleModalWindowInfoUser();
           })
           .catch(() => this.toggleModalWindowLogin())

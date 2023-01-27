@@ -1,7 +1,7 @@
 <template>
-  <modal-dialog v-if="stateModalWindowInfoUser" @click="toggleModalWindowInfoUser">
+  <modal-dialog v-if="stateModalWindowInfoUser" @click="toggleModalWindowInfoUser" class="user-info">
     <p><strong>Login:</strong> {{ user.login }}</p>
-    <p><strong>Посты:</strong> {{ user.posts }}</p>
+    <user-info-posts :posts="user.posts"></user-info-posts>
     <p>
       <strong>Телефон:</strong>
       <user-info-input type="number" class="input" v-model:model-value="user.phone"></user-info-input>
@@ -10,8 +10,8 @@
       <strong>Почта:</strong>
       <user-info-input type="text" class="input" v-model="user.mail"></user-info-input>
     </p>
-    <main-button class="button-save" @click="updateUserInfo">Сохранить</main-button>
-    <main-button class="button-save" @click="exitProfile">Выход</main-button>
+    <main-button class="user-info__button" @click="updateUserInfo">Сохранить</main-button>
+    <main-button class="user-info__button" @click="exitProfile">Выход</main-button>
   </modal-dialog>
 </template>
 
@@ -21,13 +21,17 @@ import {mapActions, mapGetters} from "vuex";
 import LoginButton from "@/components/UI/header/LoginButton.vue";
 import UserInfoInput from "@/components/UI/userInfo/UserInfoInput.vue";
 import {TOKEN} from "@/const/const";
+import PostsAuthor from "@/components/header/PostsAuthor.vue";
+import UserInfoPosts from "@/components/header/UserInfoPosts.vue";
 
 export default {
   name: "ModalInfoUser",
   components: {
+    UserInfoPosts,
     UserInfoInput,
     LoginButton,
     ModalDialog,
+    PostsAuthor
   },
   props: {
     user: {
@@ -35,7 +39,7 @@ export default {
       posts: [],
       phone: '',
       mail: '',
-    }
+    },
   },
   computed: {
     ...mapGetters('storeUser', ['stateModalWindowInfoUser', 'requestUpdateUserInfo']),
@@ -50,7 +54,7 @@ export default {
       localStorage.removeItem(TOKEN);
       this.toggleActiveUser(false);
       this.toggleModalWindowInfoUser();
-    }
+    },
   }
 }
 </script>
@@ -64,7 +68,13 @@ p {
   margin-left: 5px;
 }
 
-.button-save {
+.user-info__button {
   margin: 0 15px;
 }
+
+
+
+
+
+
 </style>
