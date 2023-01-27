@@ -23,6 +23,7 @@
 import {requestServerPost} from "@/hooks/request-server";
 import {ADD_LIKE_POST} from "@/const/const.request-server";
 import {mapGetters} from "vuex";
+import {reactive} from "vue";
 
 export default {
   name: "TheLikes",
@@ -37,15 +38,14 @@ export default {
   },
   setup(props) {
     let isLike = false;
-    const post = JSON.parse(JSON.stringify(props.post));
-
+    const post = reactive(JSON.parse(JSON.stringify(props.post)));
     async function addLike() {
       const bodyPost = {id: post._id};
       await requestServerPost(ADD_LIKE_POST, bodyPost)
           .then(resultPost => post.usersLiked = resultPost.data.usersLiked)
     }
 
-    return {isLike, addLike}
+    return {isLike, addLike, post}
   }
 }
 </script>
