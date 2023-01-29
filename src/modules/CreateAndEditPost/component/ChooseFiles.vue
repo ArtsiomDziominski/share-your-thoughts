@@ -1,7 +1,7 @@
 <template>
   <div class="select">
     <label class="select__file_label" id="choose-files">
-      <img src="src/assets/add_photo_alternate.svg" alt="Choose files">
+      <img src="../../../assets/images/add_photo_alternate.svg" alt="Choose files">
       Choose a Pictures
       <input
           type="file"
@@ -21,7 +21,7 @@
       >
       <img
           class="select__img_close"
-          src="src/assets/close.svg"
+          src="../../../assets/images/close.svg"
           @click="deleteImg(img)"
           alt="close image"
       >

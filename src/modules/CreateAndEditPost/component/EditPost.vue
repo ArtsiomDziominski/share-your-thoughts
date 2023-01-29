@@ -7,8 +7,8 @@
 </template>
 
 <script>
-import ChooseFiles from "@/components/ChooseFiles.vue";
-import ModalCreateAndEdit from "@/components/ModalCreateAndEdit.vue";
+import ChooseFiles from "@/modules/CreateAndEditPost/component/ChooseFiles.vue";
+import ModalCreateAndEdit from "@/modules/CreateAndEditPost/component/ModalCreateAndEdit.vue";
 
 export default {
   name: "EditPost",

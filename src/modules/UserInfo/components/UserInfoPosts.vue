@@ -11,7 +11,7 @@
 </template>
 
 <script>
-import PostsAuthor from "@/components/header/PostsAuthor.vue";
+import PostsAuthor from "@/modules/UserInfo/components/PostsAuthor.vue";
 
 export default {
   name: "UserInfoPosts",

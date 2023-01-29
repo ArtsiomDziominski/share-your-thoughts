@@ -8,7 +8,7 @@
 </template>
 
 <script>
-import ModalDialog from "@/components/UI/ModalDialog.vue";
+import ModalDialog from "@/UI/ModalDialog.vue";
 import {useRouter} from "vue-router";
 import {useStore} from "vuex";
 

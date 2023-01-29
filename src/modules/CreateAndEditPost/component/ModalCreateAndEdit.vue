@@ -20,7 +20,7 @@
 </template>
 
 <script>
-import ChooseFiles from "@/components/ChooseFiles.vue";
+import ChooseFiles from "@/modules/CreateAndEditPost/component/ChooseFiles.vue";
 
 export default {
   name: "ModalCreateAndEdit",

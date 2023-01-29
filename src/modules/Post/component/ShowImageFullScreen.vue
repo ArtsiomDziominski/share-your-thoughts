@@ -1,12 +1,12 @@
 <template>
   <div class="wrapper" v-if="currentImage" @click="closeImageFullScreen">
     <img class="image" :src="currentImage" alt="image full screen">
-    <img class="closeImage" src="src/assets/close.svg" @click.stop="closeImageFullScreen" alt="close">
+    <img class="closeImage" src="../../../assets/images/close.svg" @click.stop="closeImageFullScreen" alt="close">
     <button class="left_arrow" @click.stop="nextImage(-1)" @keyup.left="nextImage(-1)">
-      <img class="arrow_reverse" src="src/assets/arrow.svg" alt="arrow left">
+      <img class="arrow_reverse" src="../../../assets/images/arrow.svg" alt="arrow left">
     </button>
     <button class="right_arrow" @click.stop="nextImage(1)" @keyup.right="nextImage(1)">
-      <img src="src/assets/arrow.svg" alt="arrow right">
+      <img src="../../../assets/images/arrow.svg" alt="arrow right">
     </button>
   </div>
 </template>

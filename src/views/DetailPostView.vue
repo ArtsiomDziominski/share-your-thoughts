@@ -27,13 +27,13 @@
 <script>
 import {mapActions, mapGetters} from "vuex";
 import {DELETE_POST, GET_POST, GET_USER, UPDATE_POST} from "@/const/const.request-server";
-import Post from "@/components/Post.vue";
-import MainButton from "@/components/UI/MainButton.vue";
-import ModalCreateAndEdit from "@/components/ModalCreateAndEdit.vue";
-import TheLikes from "@/components/TheLikes.vue";
+import Post from "@/modules/Post/component/Post.vue";
+import MainButton from "@/UI/MainButton.vue";
+import ModalCreateAndEdit from "@/modules/CreateAndEditPost/component/ModalCreateAndEdit.vue";
+import TheLikes from "@/modules/Post/component/TheLikes.vue";
 import {formatDate} from "@/helpers/format-date";
-import AuthorDatePost from "@/components/AuthorDatePost.vue";
-import TheLoader from "@/components/TheLoader.vue";
+import AuthorDatePost from "@/modules/Post/component/AuthorDatePost.vue";
+import TheLoader from "@/UI/TheLoader.vue";
 
 export default {
   name: "DetailPostView",
