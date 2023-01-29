@@ -11,17 +11,16 @@
 
 <script>
 import {mapActions, mapGetters} from "vuex";
-import CreatePost from "@/components/CreatePost.vue";
+import CreatePost from "@/modules/CreateAndEditPost/component/CreatePost.vue";
 import {GET_ALL_POSTS, GET_USER} from "@/const/const.request-server";
 import {TOKEN} from "@/const/const";
-import TheLikes from "@/components/TheLikes.vue";
-import AuthorDatePost from "@/components/AuthorDatePost.vue";
+import TheLikes from "@/modules/Post/component/TheLikes.vue";
+import AuthorDatePost from "@/modules/Post/component/AuthorDatePost.vue";
 import {formatDate} from "@/helpers/format-date";
-import TheLoader from "@/components/TheLoader.vue";
 
 export default {
   name: "AllPosts",
-  components: {TheLoader, AuthorDatePost, TheLikes, CreatePost},
+  components: {AuthorDatePost, TheLikes, CreatePost},
   data() {
     return {
       allPosts: [],

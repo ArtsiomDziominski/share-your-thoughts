@@ -7,8 +7,13 @@
 </template>
 
 <script>
+import LoginAvatar from "@/modules/Header/components/LoginAvatar.vue";
+import ModalLogin from "@/modules/LoginForm/components/ModalLogin.vue";
+import ModalRegistration from "@/modules/RegistrationForm/components/ModalRegistration.vue";
+
 export default {
   name: "HeaderSite",
+  components: {ModalRegistration, ModalLogin, LoginAvatar},
 }
 </script>
 

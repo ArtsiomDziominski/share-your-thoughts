@@ -4,7 +4,7 @@
 </template>
 
 <script>
-import HeaderSite from "@/components/header/HeaderSite.vue";
+import HeaderSite from "@/modules/Header/components/HeaderSite.vue";
 
 export default {
   components: {

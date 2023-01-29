@@ -16,13 +16,13 @@
 </template>
 
 <script>
-import ModalDialog from "@/components/UI/ModalDialog.vue";
+import ModalDialog from "@/UI/ModalDialog.vue";
 import {mapActions, mapGetters} from "vuex";
-import LoginButton from "@/components/UI/header/LoginButton.vue";
-import UserInfoInput from "@/components/UI/userInfo/UserInfoInput.vue";
+import LoginButton from "@/UI/registrationAndLogin/LoginButton.vue";
+import UserInfoInput from "@/UI/UserInfoInput.vue";
 import {TOKEN} from "@/const/const";
-import PostsAuthor from "@/components/header/PostsAuthor.vue";
-import UserInfoPosts from "@/components/header/UserInfoPosts.vue";
+import PostsAuthor from "@/modules/UserInfo/components/PostsAuthor.vue";
+import UserInfoPosts from "@/modules/UserInfo/components/UserInfoPosts.vue";
 
 export default {
   name: "ModalInfoUser",

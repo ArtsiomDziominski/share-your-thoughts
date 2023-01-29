@@ -10,7 +10,7 @@
 </template>
 
 <script>
-import ModalCreateAndEdit from "@/components/ModalCreateAndEdit.vue";
+import ModalCreateAndEdit from "@/modules/CreateAndEditPost/component/ModalCreateAndEdit.vue";
 import {mapActions, mapGetters} from "vuex";
 import {CREATE_POST} from "@/const/const.request-server";
 

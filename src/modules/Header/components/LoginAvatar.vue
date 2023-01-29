@@ -1,7 +1,7 @@
 <template>
   <button @click="checkUserLogin">
-    <img v-if="stateActiveUser" src="src/assets/account-avatar.svg" alt="avatar">
-    <img v-if="!stateActiveUser" src="src/assets/input.svg" alt="input">
+    <img v-if="stateActiveUser" src="../../../assets/images/account-avatar.svg" alt="avatar">
+    <img v-if="!stateActiveUser" src="../../../assets/images/input.svg" alt="input">
   </button>
   <modal-login></modal-login>
   <modal-info-user :user="user"></modal-info-user>
@@ -9,8 +9,8 @@
 
 <script>
 import {mapActions, mapGetters} from "vuex";
-import ModalInfoUser from "@/components/header/ModalInfoUser.vue";
-import ModalLogin from "@/components/header/ModalLogin.vue";
+import ModalInfoUser from "@/modules/UserInfo/components/ModalInfoUser.vue";
+import ModalLogin from "@/modules/LoginForm/components/ModalLogin.vue";
 
 export default {
   name: "LoginAvatar",
