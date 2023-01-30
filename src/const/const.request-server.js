@@ -1,4 +1,3 @@
-export const HEADER_REQUEST = {'Content-Type': 'application/x-www-form-urlencoded'};
 export const HEADER_CONTENT_TYPE = 'application/x-www-form-urlencoded';
 export const BURL = 'http://185.104.115.27:2000/auth';//'http://185.104.115.27:2000/auth' , http://localhost:2000/auth
 export const CREATE_POST = '/create-post';

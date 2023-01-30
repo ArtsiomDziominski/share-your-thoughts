@@ -34,6 +34,7 @@ import TheLikes from "@/modules/Post/component/TheLikes.vue";
 import {formatDate} from "@/helpers/format-date";
 import AuthorDatePost from "@/modules/Post/component/AuthorDatePost.vue";
 import TheLoader from "@/UI/TheLoader.vue";
+import {requestServerGet, requestServerPost} from "@/api/request-server";
 
 export default {
   name: "DetailPostView",
@@ -54,18 +55,17 @@ export default {
   },
   computed: {
     ...mapGetters('storeCreateOrEditPost', ['stateModalWindowCreateOrEditPost']),
-    ...mapGetters('requestServer', ['requestServerPost', 'requestServerGet']),
   },
   async mounted() {
     const body = {id: this.$route.params.id}
-    await this.requestServerPost(GET_POST, body)
+    await requestServerPost(GET_POST, body)
         .then((post) => {
           this.post = post.data
           this.post.createdAt = formatDate(this.post.createdAt);
           this.post.updatedAt = formatDate(this.post.updatedAt);
           this.isLoader = false;
         })
-    await this.requestServerGet(GET_USER)
+    await requestServerGet(GET_USER)
         .then((user) => {
           this.isActiveButton = this.post.author === user.data.login;
         })
