@@ -29,7 +29,6 @@ export default {
   },
   computed: {
     ...mapGetters('storeCreateOrEditPost', ['stateModalWindowCreateOrEditPost']),
-    ...mapGetters('requestServer', ['requestServerPost']),
   },
   methods: {
     ...mapActions('storeCreateOrEditPost', ['toggleModalWindowCreateOrEditPost']),
