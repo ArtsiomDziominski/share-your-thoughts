@@ -20,7 +20,7 @@
 </template>
 
 <script>
-import {requestServerPost} from "@/hooks/request-server";
+import {requestServerPost} from "@/api/request-server";
 import {ADD_LIKE_POST} from "@/const/const.request-server";
 import {mapGetters} from "vuex";
 import {reactive} from "vue";

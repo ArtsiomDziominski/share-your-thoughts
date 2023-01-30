@@ -1,5 +1,5 @@
 import {createRouter, createWebHashHistory} from "vue-router";
-import allPosts from "@/views/AllPosts.vue";
+import allPosts from "@/views/AllPostsView.vue";
 
 export default createRouter({
     history: createWebHashHistory(),
