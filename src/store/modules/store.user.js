@@ -10,7 +10,8 @@ const state = () => ({
         login: '',
         mail: '',
         phone: '',
-    }
+    },
+    token: ''
 })
 
 const getters = {
@@ -38,9 +39,6 @@ const getters = {
     stateActiveUser(state) {
         return state.isActiveUser;
     },
-    stateUserInfo(state) {
-        return state.user;
-    },
 }
 
 const actions = {
@@ -52,6 +50,10 @@ const actions = {
     },
     async setUserInfo({commit}, user) {
         commit('updateUserInfo', user)
+    },
+    async setUserToken({commit}, token) {
+        console.log(token)
+        commit('setUserToken', token)
     }
 }
 
@@ -64,6 +66,11 @@ const mutations = {
     },
     updateUserInfo: (state, user) => {
         state.user = user;
+    },
+    setUserToken: (state, token) => {
+        state.isActiveUser = !!token;
+        console.log(state.isActiveUser)
+        state.token = token;
     }
 }
 
