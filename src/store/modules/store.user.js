@@ -6,10 +6,10 @@ const state = () => ({
     isShowDialogInfoUser: false,
     isActiveUser: false,
     user: {
-        id: '2',
-        login: '2',
-        mail: '2',
-        phone: '2',
+        id: '',
+        login: '',
+        mail: '',
+        phone: '',
     }
 })
 
@@ -51,7 +51,7 @@ const actions = {
         commit('changeActiveUser', isActive)
     },
     async setUserInfo({commit}, user) {
-        commit('changeUserInfo', user)
+        commit('updateUserInfo', user)
     }
 }
 
@@ -62,7 +62,7 @@ const mutations = {
     changeActiveUser: (state, isActive) => {
         state.isActiveUser = isActive;
     },
-    changeUserInfo: (state, user) => {
+    updateUserInfo: (state, user) => {
         state.user = user;
     }
 }

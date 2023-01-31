@@ -1,5 +1,5 @@
 import {createRouter, createWebHashHistory} from "vue-router";
-import allPosts from "@/views/AllPostsView.vue";
+import AllPostsView from "@/views/AllPostsView.vue";
 
 export default createRouter({
     history: createWebHashHistory(),
@@ -7,7 +7,7 @@ export default createRouter({
         {
             path: '/',
             name: 'home',
-            component: allPosts
+            component: AllPostsView
         },
         {
             path: '/detail/:id',
