@@ -1,8 +1,11 @@
+<template>
+</template>
+
 <script>
 import {onMounted} from "vue";
-import {getAllPost} from "@/hooks/get-all-posts";
-import {getCurrentUser} from "@/hooks/get-current-user";
 import {useStore} from "vuex";
+import {getAllPost} from "@/helpers/get-all-posts";
+import {getUser} from "@/helpers/get-user";
 
 export default {
   name: "DefaultLoading",
@@ -11,7 +14,7 @@ export default {
 
     onMounted(async () => {
       const post = await getAllPost();
-      const user = await getCurrentUser()
+      const user = await getUser()
 
       await store.dispatch('storeUser/setUserInfo', user);
       await store.dispatch('storeAllPosts/updateAllPosts', post);
