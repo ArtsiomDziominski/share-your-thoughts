@@ -1,12 +1,6 @@
 const state = () => ({
-    isShowDialogCreateEdit: false
+    isActiveDialogCreateEdit: false
 })
-
-const getters = {
-    stateModalWindowCreateOrEditPost(state) {
-        return state.isShowDialogCreateEdit;
-    },
-}
 
 const actions = {
     toggleModalWindowCreateOrEditPost({commit}) {
@@ -16,14 +10,13 @@ const actions = {
 
 const mutations = {
     changeModalWindowCreateOrEditPost: (state) => {
-        state.isShowDialogCreateEdit = !state.isShowDialogCreateEdit;
+        state.isActiveDialogCreateEdit = !state.isActiveDialogCreateEdit;
     },
 }
 
 export default {
     namespaced: true,
     state,
-    getters,
     actions,
     mutations,
 }

@@ -52,7 +52,6 @@ const actions = {
         commit('updateUserInfo', user)
     },
     async setUserToken({commit}, token) {
-        console.log(token)
         commit('setUserToken', token)
     }
 }
@@ -69,7 +68,6 @@ const mutations = {
     },
     setUserToken: (state, token) => {
         state.isActiveUser = !!token;
-        console.log(state.isActiveUser)
         state.token = token;
     }
 }
