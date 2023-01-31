@@ -13,6 +13,8 @@
 <script>
 import {mapActions, mapGetters} from "vuex";
 import {TOKEN} from "@/const/const";
+import {requestServerPost} from "@/api/request-server";
+import {LOGIN_USER} from "@/const/const.request-server";
 
 export default {
   name: "ModalLogin",
@@ -26,7 +28,7 @@ export default {
     }
   },
   computed: {
-    ...mapGetters('loginUser', ['requestLoginUser', 'stateModalWindowLogin']),
+    ...mapGetters('loginUser', ['stateModalWindowLogin']),
   },
   methods: {
     ...mapActions('storeRegistration', ['toggleModalWindowRegistration']),
@@ -38,7 +40,11 @@ export default {
     },
     loginUser() {
       this.errorMessage = '';
-      this.requestLoginUser(this.user)
+      const bodyUrl = {
+        login: this.user.login,
+        password: this.user.password,
+      }
+      requestServerPost(LOGIN_USER, bodyUrl)
           .then(resultServer => {
             const token = resultServer.data.jwt;
             localStorage.setItem(TOKEN, token);

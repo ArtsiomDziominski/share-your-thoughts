@@ -17,6 +17,7 @@ import {TOKEN} from "@/const/const";
 import TheLikes from "@/modules/Post/component/TheLikes.vue";
 import AuthorDatePost from "@/modules/Post/component/AuthorDatePost.vue";
 import {formatDate} from "@/helpers/format-date";
+import {requestServerGet} from "@/api/request-server";
 
 export default {
   name: "AllPosts",
@@ -28,13 +29,12 @@ export default {
     }
   },
   computed: {
-    ...mapGetters('requestServer', ['requestServerGet']),
     ...mapGetters('storeUser', ['stateActiveUser']),
   },
   mounted() {
     this.getAllPost();
     const token = localStorage.getItem(TOKEN)
-    if (token) this.requestServerGet(GET_USER)
+    if (token) requestServerGet(GET_USER)
         .then((user) => {
           this.setUserInfo(user.data);
           this.toggleActiveUser(true);
@@ -48,7 +48,7 @@ export default {
       this.$router.push({path: '/detail/' + id});
     },
     async getAllPost() {
-      await this.requestServerGet(GET_ALL_POSTS)
+      await requestServerGet(GET_ALL_POSTS)
           .then((result) => {
             const posts = result.data;
             posts.forEach((post, index) => {

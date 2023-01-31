@@ -30,7 +30,6 @@ export default {
   },
   computed: {
     ...mapGetters('storeRegistration', ['stateModalWindowRegistration']),
-    ...mapGetters('requestServer', ['requestServerPost']),
   },
   methods: {
     ...mapActions('storeRegistration', ['toggleModalWindowRegistration']),

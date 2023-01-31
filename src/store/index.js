@@ -1,8 +1,7 @@
 import { createStore, createLogger } from 'vuex'
-import storeRegistration from './modules/store.registration'
-import storeCreateOrEditPost from './modules/store.create-edit-post'
-import requestServer from './modules/request-server'
-import loginUser from './modules/store.login'
+import storeRegistration from '../modules/RegistrationForm/store/store.registration'
+import storeCreateOrEditPost from '../modules/CreateAndEditPost/store/store.create-edit-post'
+import loginUser from '../modules/LoginForm/store/store.login'
 import storeUser from './modules/store.user'
 import storeAllPosts from './modules/store.all-posts'
 
@@ -12,7 +11,6 @@ export default createStore({
     modules: {
         storeRegistration,
         storeCreateOrEditPost,
-        requestServer,
         loginUser,
         storeUser,
         storeAllPosts,
