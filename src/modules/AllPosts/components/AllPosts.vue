@@ -22,7 +22,7 @@ export default {
     const store = useStore();
     const router = useRouter()
 
-    const allPosts = computed(()=> store.state.storeAllPosts.allPosts);
+    const allPosts = computed(() => store.state.storeAllPosts.allPosts);
 
     const showPost = id => {
       router.push({path: '/detail/' + id});

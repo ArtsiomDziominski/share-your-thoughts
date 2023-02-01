@@ -1,12 +1,18 @@
 <template>
-  <button>
+  <button :disabled="disabled">
     <slot></slot>
   </button>
 </template>
 
 <script>
 export default {
-  name: 'main-button'
+  name: 'main-button',
+  props: {
+    disabled: {
+      default: false,
+      type: Boolean,
+    },
+  }
 }
 </script>
 
@@ -21,6 +27,7 @@ button {
 button:hover {
   background-color: #fafafa;
 }
+
 button:active {
   background-color: #b6b6b6;
   cursor: pointer;
